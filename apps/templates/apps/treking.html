@@ -1,0 +1,225 @@
+{% extends 'apps/base.html' %}
+{% load static %}
+
+{% block title %} Explore Adventure | AAK {% endblock %}
+
+{% block extra_css %} <link rel="stylesheet" href="{% static 'apps/treking.css' %}"> {% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="text-center" style="margin-bottom:20px;">
+        <h2><b>Trekking Tours and Activities</b></h2>
+    </div>
+
+    <!-- Trek Cards -->
+    <!-- 1 -->
+    <div class="row trek-row trek-card">
+        <div class="col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1463694775559-eea25626346b?q=80&w=2070&auto=format&fit=crop" alt="Half Day Trekking">
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h4>1. Half Day Trekking (Munnar Valley)</h4>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars-gray"></span>
+            <span class="fa fa-star stars-gray">&ensp;189</span>
+            <p>Wildlife watching. 07:00 am start by walk through Tea Plantation, Forest, Grassland & Rocks.</p>
+            <i class='fas fa-clock'>&ensp;Free Cancellation</i><br>
+            <i class='fas fa-check'>&ensp;Recommended by 100% of travellers</i>
+            <button class="btn view-btn" data-toggle="modal" data-target="#genericModal"
+                data-title="Half Day Trekking (Munnar Valley)"
+                data-desc="07:00 am start by walk through Tea Plantation, Forest, Grassland & Rocks."
+                data-img="https://images.unsplash.com/photo-1463694775559-eea25626346b?q=80&w=2070&auto=format&fit=crop">
+                View
+            </button>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h4><b>Category Types</b></h4>
+            <p>Attractions</p>
+            <p>Tours</p>
+            <p>Day Trips</p>
+            <h4><b>Outdoor Activities</b></h4>
+            <p>Concert & Shows</p>
+            <p>Food & Drinks</p>
+            <p>Events</p>
+        </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="row trek-row trek-card">
+        <div class="col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1542402324-460ca15d0245?q=80&w=2070&auto=format&fit=crop" alt="Cinque Terre Trip">
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h4>2. Cinque Terre Day Trip from Florence</h4>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars-gray"></span>
+            <span class="fa fa-star stars-gray">&ensp;189</span>
+            <p>Explore the five idyllic fishing villages of Italy’s UNESCO-listed Cinque Terre.</p>
+            <i class='fas fa-clock'>&ensp;Free Cancellation</i><br>
+            <i class='fas fa-check'>&ensp;Recommended by 100% of travellers</i>
+            <button class="btn view-btn" data-toggle="modal" data-target="#genericModal"
+                data-title="Cinque Terre Day Trip"
+                data-desc="Explore the five idyllic fishing villages of Italy’s UNESCO-listed Cinque Terre."
+                data-img="https://images.unsplash.com/photo-1542402324-460ca15d0245?q=80&w=2070&auto=format&fit=crop">
+                View
+            </button>
+        </div>
+        <div class="col-md-4 col-sm-12"></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="row trek-row trek-card">
+        <div class="col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1484264883846-eb04404af310?q=80&w=1932&auto=format&fit=crop" alt="Amalfi Coast Walking">
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h4>3. Walking the Amalfi Coast</h4>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars-gray"></span>
+            <span class="fa fa-star stars-gray">&ensp;189</span>
+            <p>Discover the highlights of Europe’s most dramatic coastline on foot with true experts.</p>
+            <i class='fas fa-clock'>&ensp;Free Cancellation</i><br>
+            <i class='fas fa-check'>&ensp;Recommended by 100% of travellers</i>
+            <button class="btn view-btn" data-toggle="modal" data-target="#genericModal"
+                data-title="Walking the Amalfi Coast"
+                data-desc="Discover the highlights of Europe’s most dramatic coastline on foot with true experts."
+                data-img="https://images.unsplash.com/photo-1484264883846-eb04404af310?q=80&w=1932&auto=format&fit=crop">
+                View
+            </button>
+        </div>
+        <div class="col-md-4 col-sm-12"></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="row trek-row trek-card">
+        <div class="col-md-4 col-sm-12">
+            <img src="https://plus.unsplash.com/premium_photo-1687653079775-d73c69b1ccb8?q=80&w=2070&auto=format&fit=crop" alt="Walking in Andalucia">
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h4>4. Walking in Andalucia</h4>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars-gray"></span>
+            <span class="fa fa-star stars-gray">&ensp;189</span>
+            <p>Romantic countryside, rugged hills and villages of Andalucia on foot.</p>
+            <i class='fas fa-clock'>&ensp;Free Cancellation</i><br>
+            <i class='fas fa-check'>&ensp;Recommended by 100% of travellers</i>
+            <button class="btn view-btn" data-toggle="modal" data-target="#genericModal"
+                data-title="Walking in Andalucia"
+                data-desc="Romantic countryside, rugged hills and villages of Andalucia on foot."
+                data-img="https://plus.unsplash.com/premium_photo-1687653079775-d73c69b1ccb8?q=80&w=2070&auto=format&fit=crop">
+                View
+            </button>
+        </div>
+        <div class="col-md-4 col-sm-12"></div>
+    </div>
+
+    <!-- 5 -->
+    <div class="row trek-row trek-card">
+        <div class="col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1593739742226-5e5e2fdb1f1c?q=80&w=2070&auto=format&fit=crop" alt="Walking in Tuscany">
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h4>5. Walking in Tuscany</h4>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars-gray"></span>
+            <span class="fa fa-star stars-gray">&ensp;189</span>
+            <p>Walk through Italy across Tuscany's idyllic mountains.</p>
+            <i class='fas fa-clock'>&ensp;Free Cancellation</i><br>
+            <i class='fas fa-check'>&ensp;Recommended by 100% of travellers</i>
+            <button class="btn view-btn" data-toggle="modal" data-target="#genericModal"
+                data-title="Walking in Tuscany"
+                data-desc="Walk through Italy across Tuscany's idyllic mountains."
+                data-img="https://images.unsplash.com/photo-1593739742226-5e5e2fdb1f1c?q=80&w=2070&auto=format&fit=crop">
+                View
+            </button>
+        </div>
+        <div class="col-md-4 col-sm-12"></div>
+    </div>
+
+    <!-- 6 -->
+    <div class="row trek-row trek-card">
+        <div class="col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1527716283601-40c089a76135?q=80&w=1974&auto=format&fit=crop" alt="Walking the Island of Madeira">
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <h4>6. Walking the Island of Madeira</h4>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars-gray"></span>
+            <span class="fa fa-star stars-gray">&ensp;189</span>
+            <p>Explore the verdant landscapes on one of Portugal’s most scenic islands.</p>
+            <i class='fas fa-clock'>&ensp;Free Cancellation</i><br>
+            <i class='fas fa-check'>&ensp;Recommended by 100% of travellers</i>
+            <button class="btn view-btn" data-toggle="modal" data-target="#genericModal"
+                data-title="Walking the Island of Madeira"
+                data-desc="Explore the verdant landscapes on one of Portugal’s most scenic islands."
+                data-img="https://images.unsplash.com/photo-1527716283601-40c089a76135?q=80&w=1974&auto=format&fit=crop">
+                View
+            </button>
+        </div>
+        <div class="col-md-4 col-sm-12"></div>
+    </div>
+
+</div>
+
+<!-- Dynamic Modal -->
+<div class="modal fade" id="genericModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalTitle">Tour Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 modal-col">
+            <img id="modalImg" class="modal-img" src="" alt="Tour Image">
+            
+          </div>
+          <div class="col-md-6 modal-col">
+            <h5 class="modal-header-text">Description</h5>
+            <p id="modalDesc"></p>
+            <i class='fas fa-clock'>&ensp;Free Cancellation</i><br>
+            <i class='fas fa-check'>&ensp;Recommended by 100% of travellers</i>
+            <hr>
+            <h5>Full Secure</h5>
+            <h5>Food</h5>
+            <h5>Proper Guidance</h5>
+            <a href="wtai://wp/mc;18475555555">Call 1-847-555-5555</a>
+            <i class="fa fa-whatsapp" style="font-size:24px;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block js %} 
+<script>
+$('.view-btn').click(function(){
+    var title = $(this).data('title');
+    var desc = $(this).data('desc');
+    var img = $(this).data('img');
+
+    $('#modalTitle').text(title);
+    $('#modalDesc').text(desc);
+    $('#modalImg').attr('src', img);
+});
+</script>
+{% endblock %}
+ 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>login</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+ body{
+  background-color: #40607c;
+}
+
+/* Card box */
+#one{
+  height: 300px;
+  background-color: white;
+  margin-top: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2),
+              0 6px 20px rgba(0,0,0,0.19);
+  border-radius: 5px;
+}
+
+/* Inputs */
+input[type=text],
+input[type=password]{
+  width: 100%;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: whitesmoke;
+}
+
+/* Button centered */
+button{
+  background-color: #3D85C6;
+  color: white;
+  padding: 7px 11px;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2),
+              0 6px 20px rgba(0,0,0,0.19);
+}
+
+/* Heading */
+.reg{
+  color: white;
+  font-family: cursive;
+  text-align: center;
+}
+</style>
+
+
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-12" id="up">
+      <h3 class="reg">Login your account</h3>
+    </div>
+
+    <div class="col-lg-4 col-md-4 d-none d-md-block"></div>
+
+    <!-- Main form box -->
+    <div class="col-lg-4 col-md-4 col-sm-12" id="one">
+      <form action="login" method="post">
+        {% csrf_token %}
+
+        <label><b>Username</b></label>
+        <input type="text" name="username" placeholder="username">
+
+        <label><b>Password</b></label>
+        <input type="password" name="password" placeholder="*******">
+
+        <button type="submit">Login</button>
+
+        <h5 class="text-center">
+          <a href="/apps/index/">Back to App</a>
+        </h5>
+      </form>
+    </div>
+
+    <div class="col-lg-4 col-md-4 d-none d-md-block"></div>
+
+  </div>
+</div>
+
+
+</body>
+</html>
+
+
+

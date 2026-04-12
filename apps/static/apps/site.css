@@ -1,0 +1,1164 @@
+.imgm{
+	width:100%; 
+	height: 500px;
+}
+
+
+.row1 {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.text {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: bold;
+  font-size: 50px;
+}
+
+
+.text1 {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: cursive;
+  font-size: 20px;
+}
+/*				   				button*/
+.btn1 {
+  position: absolute;
+  top: 60%;
+  left: 37%;
+  color: white;
+  font-size: 14px;
+  padding: 9px 20px;
+  color: white;
+   border-radius: 35px; 
+   background-color:transparent;
+   border-color: white;
+  width: auto;
+
+ }
+
+
+.btn1:hover {
+  background-color: black;
+}
+
+
+/*/*								button*/
+.btn2 {
+  position: absolute;
+  top: 60%;
+  left: 53%;
+  color: white;
+  font-size: 14px;
+  padding: 9px 20px;
+  color: white;
+   border-radius: 35px; 
+   background-color:black;
+   border-color: white;
+  width: auto;
+
+ }
+
+
+.btn2:hover {
+  background-color: transparent;
+}
+
+
+.box1{
+	 position: absolute;
+  top: 85%;
+  left: 7%;
+	height: 200px;
+	width: 20%;
+	background-color: darkgrey;
+	float: left;
+	
+}
+
+.box2{
+	 position: absolute;
+  top: 85%;
+  left: 30%;
+	height: 200px;
+	width: 20%;
+	background-color: darkgrey;
+	float: left;
+}
+
+.box3{
+	 position: absolute;
+  top: 85%;
+  left: 53%;
+	height: 200px;
+	width: 20%;
+	background-color: darkgrey;
+	float: left;
+}
+
+.box4{
+	 position: absolute;
+  top: 85%;
+  left: 65%;
+  margin-left: 135px;
+	height: 200px;
+	width: 20%;
+	background-color: darkgrey;
+	float: left;
+}
+/*									boxes h2*/
+.h2{
+	font-family: fantasy;
+	font-style:  bold;
+	text-align: center;
+}
+/*									icons*/
+#trekking{
+	font-size:80px; 
+	margin-top: 25px;
+	color: black;
+
+
+}
+
+#camping{
+	font-size:80px; 
+	margin-top: 25px;
+	color: black;
+
+
+}
+
+
+#caravan{
+	font-size:80px; 
+	margin-top: 25px;
+	color: black;
+
+
+}
+
+#news{
+	font-size:80px; 
+	margin-top: 25px;
+	color: black;
+
+
+}
+.row2{
+	height: 50px;
+}
+
+
+
+
+@media only screen and (max-width:1100px){
+
+	
+.text {
+  top: 30%;
+  left: 50%;
+  font-size: 35px;
+}
+
+
+.text1 {
+  top: 45%;
+  left: 50%;
+  font-size: 13px;
+}
+
+.btn1 {
+  top: 65%;
+  left: 37%;
+  font-size: 10px;
+  padding: 9px 20px;
+   border-radius: 35px; 
+   width: 10%;
+
+ }
+
+
+.btn1:hover {
+  background-color: black;
+}
+
+
+/*/*								button*/
+.btn2 {
+  position: absolute;
+  top: 65%;
+  left: 53%;
+  color: white;
+  font-size: 10px;
+  padding: 9px 20px;
+  color: white;
+   border-radius: 35px; 
+   background-color:black;
+   width: 10%;
+   border-color: white;
+
+ }
+
+.btn2:hover {
+  background-color: transparent;
+}
+
+
+}
+
+@media only screen and (max-width:700px){
+.box1{
+	 
+  top: 150%;
+  left: 30%;
+	height: 150px;
+	width: 20%;
+	background-color: darkgrey;
+	
+	
+}
+
+.box2{
+	 
+  top: 150%;
+  left: 52%;
+	height: 150px;
+	width: 20%;
+	background-color: darkgrey;
+	
+}
+
+.box3{
+	
+  top: 200%;
+  left: 30%;
+	height: 150px;
+	width: 20%;
+	background-color: darkgrey;
+	
+}
+
+.box4{
+	 
+  top: 200%;
+  left: 37%;
+  margin-left: 80px;
+	height: 150px;
+	width: 20%;
+	background-color: darkgrey;
+	
+}
+
+#trekking{
+	font-size:30px; 
+	margin-top: 20px;
+
+
+}
+
+#camping{
+	font-size:30px; 
+	margin-top: 20px;
+
+
+}
+
+
+#caravan{
+	font-size:30px; 
+	margin-top: 20px;
+
+
+}
+
+#news{
+	font-size:30px; 
+	margin-top: 20px;
+
+
+}
+.btn1 {
+  position: absolute;
+  top: 65%;
+  left: 37%;
+  color: white;
+  font-size: 8px;
+  padding: 9px 20px;
+  color: white;
+   border-radius: 32px; 
+   background-color:transparent;
+   width: 10%;
+   border-color: white;
+
+ }
+
+
+.btn1:hover {
+  background-color: black;
+}
+
+
+/*/*								button*/
+.btn2 {
+  top: 65%;
+  left: 53%;
+  color: white;
+  font-size: 8px;
+  padding: 9px 20px;
+
+   border-radius: 32px; 
+   width: 10%;
+ 
+ }
+
+.btn2:hover {
+  background-color: transparent;
+
+}
+.h2{
+	font-size: 20px;
+}
+}
+
+@media only screen and (max-width:450px){
+
+
+	.text {
+  top: 30%;
+  left: 50%;
+  font-size: 20px;
+}
+
+
+.text1 {
+  top: 45%;
+  left: 50%;
+  font-size: 8px;
+}
+
+
+	.box1{
+	 
+  top: 105%;
+  left: 30%;
+	height: 150px;
+	width: 20%;
+	background-color: darkgrey;
+	
+	
+}
+
+.box2{
+	 
+  top: 105%;
+  left: 52%;
+	height: 150px;
+	
+	
+}
+
+.box3{
+	
+  top: 140%;
+  left: 30%;
+	height: 150px;
+
+	
+}
+
+.box4{
+	 
+  top: 140%;
+  left: 30%;
+  margin-left: 80px;
+	
+	
+}
+
+#trekking{
+	font-size:30px; 
+	margin-top: 15px;
+
+
+}
+
+#camping{
+	font-size:30px; 
+	margin-top: 15px;
+
+
+}
+
+
+#caravan{
+	font-size:30px; 
+	margin-top: 15px;
+
+
+}
+
+#news{
+	font-size:30px; 
+	margin-top: 15px;
+
+
+}
+.btn1 {
+  
+  font-size: 6px;
+  padding: 9px 25px;
+  color: white;
+  
+
+ }
+
+ .btn2 {
+  
+  font-size: 6px;
+  padding: 9px 25px;
+  
+
+ }
+ 
+
+
+.h2{
+ 	font-size:15px;
+ }
+
+
+
+}
+
+
+@media only screen and (max-width:300px){
+
+
+
+
+	.box1{
+	 
+  top: 115%;
+  left: 30%;
+	
+	
+	
+}
+
+.box2{
+	 
+  top: 115%;
+  left: 52%;
+	
+	
+	
+}
+
+.box3{
+	
+  top: 145%;
+  left: 30%;
+	height: 150px;
+
+	
+}
+
+.box4{
+	 
+  top: 145%;
+  left: 30%;
+  margin-left: 80px;
+	
+	
+}
+
+
+}
+
+/*														2nd divion*/
+
+
+.photo1{
+	
+	width: 50%;
+	height: 400px;
+	background-color: #030d38;
+	float: left;
+}
+
+.photo2{
+	
+	width: 50%;
+	height: 400px;
+	background-color:#030d38 ;
+	float: left;
+}
+/*																images*/
+.img1{
+	height: 370px; 
+	width: 40%; 
+	margin-left: 20px;
+	margin-top: 15px;
+	float: left;
+
+}
+.img2{
+	height: 170px; 
+	width: 50%;
+	float:left;
+	margin-top: 20px;
+	margin-left: 20px;
+
+}
+.img3{
+	height: 180px; 
+	width: 50%;
+	margin-top: 20px;
+	margin-left: 20px;
+
+
+}
+
+/*																		about us*/
+.h4{
+	color: darkgrey;
+	padding-top: 10px;
+	font-size: 20px;
+	font-family: monospace;
+	font-weight: bold;
+	padding-left: 15px;
+
+}
+/*																		experience with us*/
+.us{
+
+	font-family: fantasy;
+	font-style:  bold;
+	color: darkgrey;
+	padding-left: 15px;
+}
+#fas1{
+	color: darkgrey;
+	
+}
+
+#fas2{
+	color: darkgrey;
+	padding-left: 140px;
+}
+#fas3{
+	color: darkgrey;
+	
+}
+
+#fas4{
+	color: darkgrey;
+	padding-left: 110px;
+	
+}
+/*																	@media only screen and (max-width:900px){*/
+
+
+																	
+@media only screen and (max-width:900px){
+
+	.photo1{
+	
+	width: 100%;
+	height: 400px;
+	
+	
+}
+
+.photo2{
+	
+	width: 100%;
+	height: 400px;
+	
+	
+}
+
+
+
+#fas4{
+	
+	padding-top: 0px;
+	padding-left: 103px;
+	
+}
+
+}
+
+/*																@media only screen and (max-width:450px){*/
+																	
+@media only screen and (max-width:450px){
+
+
+
+
+.photo1{
+	
+	width: 100%;
+	height: 400px;
+	float: left;
+}
+
+.photo2{
+	
+	width: 100%;
+	height: 400px;
+	float: left;
+}
+
+.img1{
+	height: 100px; 
+	width: 80%; 
+	padding-left: 40px;
+	
+	
+
+}
+.img2{
+	height: 100px; 
+	width: 80%;
+	padding-left: 40px;
+	
+	
+
+}
+.img3{
+	height: 100px; 
+	width: 80%;
+	padding-left: 40px;
+	
+
+
+}
+
+#fas1{
+	
+	padding-left: 105px;
+	
+}
+#fas2{
+	
+	padding-left: 105px;
+}
+
+#fas3{
+	padding-left: 105px;
+	
+}
+
+
+
+
+}
+
+
+
+
+
+						/*												2nd division end*/
+
+
+/*			
+
+												         		3rd divison start*/
+
+#hiking{
+	background-color: #030d38;
+	font-size: 25px;
+	color: darkgrey;
+	padding: 15px;
+	border-radius: 10px;
+	 border-right: 6px solid white;
+}
+#sites{
+	background-color: #030d38;
+	font-size: 25px;
+	color: darkgrey;
+	padding: 15px;
+	border-radius: 10px;
+	 border-right: 6px solid white;
+}
+
+#years{
+	background-color: #030d38;
+	font-size: 25px;
+	color: darkgrey;
+	padding: 15px;
+	border-radius: 10px;
+	 border-right: 6px solid white;
+}
+
+#members{
+	background-color: #030d38;
+	font-size: 25px;
+	color: darkgrey;
+	padding: 15px;
+	border-radius: 10px;
+	 border-right: 6px solid white;
+}
+
+#con1{
+	background-color: darkgrey;
+	height: 250px;
+}
+
+
+/*																								4th divison*/
+
+ #heading{
+    background-color: #030d38;
+    height: 450px;
+  }
+
+
+ .ph{
+
+   height:300px;
+  border-radius: 10%;
+ 
+
+ }
+
+/*																			    			6th division*/
+
+.cardimg-1{
+
+	height:300px; 
+	padding-top: 20px;
+	border-radius: 30px;
+	
+
+}
+
+
+
+.cardtext-1{
+	color:  #030d38;
+	 font-family: serif;
+  font-size: 25px;
+	
+
+}
+
+#cardbox{
+	background-color: darkgrey;
+	 height: 450px;
+
+}
+
+
+
+
+.cardimg-2{
+
+	height:300px; 
+	padding-top: 20px;
+	border-radius: 30px;
+	}
+
+
+
+.cardtext-2{
+	color:  #030d38;
+	 font-family: serif;
+  font-size: 25px;
+}	
+
+#cardbox{
+	background-color: darkgrey;
+	 height: 450px;
+
+}
+.heading{
+	color:  #030d38;
+	background-color: darkgrey;
+	 font-family: serif;
+  font-size: 35px;
+  padding-top: 10px;
+
+}
+.cardrow{
+height: 100px;
+	background-color: darkgrey;
+
+}
+
+
+
+/*			6th division*/
+
+
+.dvimg{
+
+	height:100px; 
+	border-radius: 30%;
+
+
+}
+
+
+
+.dvtext{
+	color: darkgrey;
+
+	height: 45px;
+	width: 50%;
+}
+
+
+/*									    				6th divison end*/*/
+		
+
+
+/*														7th divison*/
+
+
+
+.hgfd{
+	background-color: black;
+}
+
+
+
+#textline1{
+	height: 600px;
+	background-color: #030d38;
+}
+#imgline{
+	height: 600px;
+	background-color: #030d38;
+}
+#textline2{
+	height: 600px;
+	background-color: #030d38;
+
+}
+#hdline{
+	height: 100px;
+	background-color: #030d38;
+	font-family: cursive;
+	font-style: bold;
+
+}
+
+
+#icons1{
+	font-size: 40px;
+	background-color: darkgrey;
+	color: #030d38;
+	border-radius: 50%;
+}
+#linesrc{
+	height: 600px;
+	width: 100%;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+#iconsline{
+
+	background-color: #030d38;
+	 height: 200px;
+	 padding-top: 20px;
+
+}
+.txtclr{
+	color: darkgrey;
+}
+/*	                            	8th divison*/
+
+
+
+.hd{
+	font-size: 50px;
+	font-style: bold;
+	color: #030d38;
+}
+.par{
+	font-family: cursive;
+	margin-top: 30px;
+	color: #030d38;
+}
+#ic{
+	font-size: 25px;
+	margin-left: 40px;
+	margin-top: 60px;
+	color: #030d38;
+
+}
+#moun{
+	background-color: darkgrey;
+	height: 500px;
+}
+.wlp{
+	height: 450px;
+	margin-top: 20px;
+	
+	
+}
+
+/*															 9th diison	*/
+
+
+
+#out{
+	height: 220px;
+	margin-top: 30px;
+	 transition: transform .2s; /* Animation */
+  height: 220px;
+  margin: 0 auto;
+}
+#in{
+	height: 200px;
+	
+}
+
+.outdoor{
+	font-size: 40px;
+	font-family: cursive;
+	color: black;
+}
+
+
+#out:hover {
+  transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+/*                     10 div sion*/
+
+
+.rowmain{
+  position: relative;
+  text-align: center;
+  color: white;
+  /* background-color:  ; */
+  height: 730px;
+  margin-top: 20px;
+
+}
+
+.centered {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+}
+#overimg{
+	 height: 250px;
+	 border-radius: 15px;
+	 margin-top: 10px;
+	  background-color: #030d38 ;
+}
+.centeredp{
+
+	position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+
+}
+#ppp{
+	 background-color: #030d38 ;
+  height: 300px;
+}
+
+
+/*							11th divison*/
+
+
+.rowfull {
+  position: relative;
+  width: 100%;
+  margin-top: 60px;
+  margin-right: 10px;
+
+
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 250px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #030d38;
+  overflow: hidden;
+  width: 100%;
+  height:0;
+  transition: .5s ease;
+}
+
+.rowfull:hover .overlay {
+  bottom: 0;
+  height: 100%;
+}
+
+.rrr{
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+#fas{
+  font-size:30px;
+  position: absolute;
+  top: 20%;
+  left: 48%;
+  color: darkgrey;
+
+}
+.p{
+  font-size:15px;
+  position: absolute;
+  top: 60%;
+  left: 22%;
+  color: darkgrey;
+
+}
+#shelter{
+	height: 250px;
+	background-color:darkgrey; 
+}
+
+
+
+
+
+
+
+
+                        /*12th divsion of img dark*/
+
+#backimg{
+    height: 500px ; 
+    filter: brightness(20%);
+    width: 100%;
+
+  }
+ 
+
+
+.full {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: white;
+}
+.half{
+ position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: white;
+}
+.lock{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+   font-size: 14px;
+  padding: 9px 20px;
+   border-radius: 10px; 
+  transform: translate(-50%, -50%);
+  border-color: white;
+  background-color: darkgrey;
+
+}
+
+
+
+
+
+
+
+/*														footer*/
+
+.headings{
+      font-size: 20px;
+
+       }
+       .gog{
+        font-size: 15px;
+        margin-top: 10px;
+        color: darkgrey;
+       }
+       .gog:hover{
+        color: darkblue;
+        font-family: monospace;
+       }
+
+       .headings{
+        color:  #3B5998;
+       }
+
+
+
+         .fa {  
+     padding: 20px;
+  font-size: 20px;
+  width: 50px;
+  border-radius: 60%;
+}  
+
+.fa-facebook {  
+  color: #3B5998;   
+}  
+.fa-twitter {  
+   
+   color: #3B5998;
+}  
+   
+.fa-linkedin {    
+   color: #3B5998;  
+}  
+  
+.fa:hover {  
+    opacity: 0.9; 
+    background: #55ACEE;  
+}  
+#qqq{
+  height: 250px;
+  background-color: black;
+}
+#lll{
+  height: 30px;
+  background-color: black;
+}
+.hr{
+  width: 90%;
+}
+.mim{
+  color:#3B5998 ;
+  font-size: 15px;
+  background-color: black;
+}
+.mim:hover{
+  color: darkgrey;
+  font-family: monospace;
+}
+
+

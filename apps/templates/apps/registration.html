@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>registeration</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+
+  body{
+  background:#3f536c;
+    background-color: #40607c ;
+  }
+
+  #one{
+    height: 680px;
+    background-color: white;
+    margin-top: 10px;
+
+  }
+
+
+  #one {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+  input[type=text], input[type=password] {
+     width: 100%;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: whitesmoke;
+  
+    }
+
+
+
+    button{
+    background-color: #3D85C6;
+  color: white;
+  padding: 7px 11px;
+  margin: 2px 0;
+  width: 80%;
+  border: none;
+  border-radius:5px;
+  }
+
+button {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  align-items: center;
+}
+.reg{
+  color: white;
+  font-family: cursive;
+  text-align: center;
+
+}
+    
+</style>
+
+</head>
+<body>
+
+ <div class="row">
+
+  <div class="col-12 col-md-12 col-sm-0" id="up">
+      <h3 class="reg">Register your account</h3>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-1"></div>
+                     <!-- main row -->
+
+ <form action="register" method="post">
+             {% csrf_token %}   
+  <div class="col-lg-4 col-md-4 col-sm-10" id="one">
+
+           <label style="margin-top:10px;font-size: 14px;" >First Name</label>
+    <input type="text" name="first_name" placeholder=" Name" style="border: none; outline: none;border-bottom: 2px solid black; background: no-repeat;width: 100%;" >
+    <label style="margin-top:10px;font-size: 14px;" >Last Name</label>
+    <input type="text" name="last_name" placeholder=" Name" style="border: none; outline: none;border-bottom: 2px solid black; background: no-repeat;width: 100%;" >
+    <label style="margin-top:23px;font-size: 14px;" >UserName</label>
+    <input type="text" name="username"  placeholder="username" required="required" style="border: none; outline: none;border-bottom: 2px solid black;background: no-repeat;width: 100%;" >
+    <label style="margin-top:23px;font-size: 14px;" >Email</label>
+    <input type="text" name ="email" placeholder=" Email address" style="border: none; outline: none;border-bottom: 2px solid black;background: no-repeat;width: 100%;" >
+   <label style="font-size: 14px;margin-top: 23px;" >Password</label>
+    <input type="password" name="password1" placeholder="password1" required="required" style="border: none; outline: none;border-bottom: 2px solid black;background: no-repeat;width: 100%;" >
+    
+    <label style="font-size: 14px;margin-top: 23px;" >Confirm Password</label>
+    <input type="password" name="password2" placeholder="password2" required="required" style="border: none; outline: none;border-bottom: 2px solid black;background: no-repeat;width: 100%;" >
+
+   
+                <div class="text-center">
+                 <button>Register</button><br><br>
+
+                <h5>
+                  <a href="login">already have an account sing in</a>
+                </h5>
+                 </div>
+
+      
+
+</div>
+
+
+      <div class="col-lg-4 col-md-4 col-sm-1">
+        
+      </div>
+</div>
+  
+</body>
+</html>
+
+        
+
+
+    
+    

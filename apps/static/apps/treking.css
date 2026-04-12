@@ -1,0 +1,71 @@
+body {
+    background-color:#3f536c;
+}
+
+/* Trek rows */
+.trek-row {
+    background-color: #070912;
+;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/* Trek card */
+.trek-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.trek-card h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+.trek-card p {
+    font-size: 14px;
+}
+.stars {
+    font-size: 12px;
+    color: darkorange;
+}
+.stars-gray {
+    font-size: 12px;
+    color: gray;
+}
+.trek-card button {
+    width: 100%;
+    background-color: #3f536c;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Modal */
+.modal-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.modal-header-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.modal-col {
+    padding: 10px;
+}
+h2, h4, h5 {
+    color: darkgrey; /* dark blue, change to any color you like */
+}
+
+p, i, span {
+    color: darkgrey; /* dark grey, change as you prefer */
+}
+#genericModal .modal-body, 
+#genericModal .modal-body h5, 
+#genericModal .modal-body p, 
+#genericModal .modal-body i, 
+#genericModal .modal-body span {
+    color: #2c3e50; /* Change this to any color you like */
+}

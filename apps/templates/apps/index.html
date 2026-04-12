@@ -1,0 +1,717 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adventure With Me</title>
+
+<!-- Bootstrap 3 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Font Awesome (latest) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{% static 'apps/index.css' %}">
+
+
+</head>
+<body>
+
+                     <!-- navbar -->
+                
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">AAK Camps</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          More <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">News</a></li>
+          <li><a href="{% url 'caravan' %}">Caravan information</a></li>
+        </ul>
+      </li>
+      <li><a href="{% url 'news' %}">Reports</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'register' %}">
+        <span class="glyphicon glyphicon-user"></span> Sign Up
+      </a></li>
+      <li><a href="{% url 'login' %}">
+        <span class="glyphicon glyphicon-log-in"></span> Login
+      </a></li>
+    </ul>
+  </div>
+</nav>
+
+                                    <!-- image -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Camps</h1>
+        <p>
+            Camping is an outdoor activity that involves staying overnight
+            in a temporary shelter, such as a tent or cabin, in nature.
+        </p>
+
+        <div class="buttons">
+            <a href="#">learn more</a>
+            <a href="#" class="black">view tours</a>
+        </div>
+    </div>
+
+    <!-- Boxes -->
+    <div class="box-wrapper">
+        <div class="box">
+            <i class="fas fa-hiking"></i>
+          <h3 ><a href="{% url 'treking' %}">trekking</a></h3>
+        </div>
+        <div class="box">
+            <i class="fas fa-campground"></i>
+          <h3 ><a href="{% url 'login' %}">camping</a></h3>
+        </div>
+        <div class="box">
+            <i class="fas fa-caravan"></i>
+            <h3><a href="/apps/caravan/">caravan</a></h3>
+        </div>
+        <div class="box">
+            <i class="fas fa-fire"></i>
+            <h3><a href="/apps/news/">news and events</a></h3>
+        </div>
+    </div>
+</section>
+
+                                        <!-- 2nd divsion -->
+
+<div class="about-section">
+
+  <!-- LEFT IMAGE -->
+  <div class="img-left">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900">
+  </div>
+
+  <!-- CENTER IMAGES -->
+  <div class="img-center">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900">
+    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900">
+  </div>
+
+  <!-- RIGHT CONTENT -->
+  <div class="content">
+    <h4>about us</h4>
+    <h1>Experience the Adventure with Us</h1>
+
+    <p>
+      At our outdoor adventure club, we've been dedicated to providing exceptional hiking,
+      camping, and trekking experiences for over two decades.
+    </p>
+
+    <p>
+      Our mission is to create memorable adventures that connect you with nature
+      and inspire a lifelong love for the outdoors.
+    </p>
+
+    <div class="features">
+      <span><i class="fa-solid fa-person-hiking"></i> Experienced Guides</span>
+      <span><i class="fa-solid fa-tree"></i> Safe and Scenic Trails</span>
+      <span><i class="fa-solid fa-fire"></i> Beautiful Campsites</span>
+      <span><i class="fa-solid fa-user"></i> Community of Enthusiasts</span>
+    </div>
+  </div>
+
+</div>
+                            <!-- 3rd divison -->
+
+  
+<section class="stats-section">
+  <div class="stats-wrapper">
+
+    <div class="stat-box">
+      <i class="fa-solid fa-person-hiking"></i>
+      <h2>100+</h2>
+      <p>hiking trails</p>
+    </div>
+
+    <div class="stat-box">
+      <i class="fa-solid fa-campground"></i>
+      <h2>500+</h2>
+      <p>Camping Sites</p>
+    </div>
+
+    <div class="stat-box">
+      <i class="fa-solid fa-truck"></i>
+      <h2>30+</h2>
+      <p>Years of Operation</p>
+    </div>
+
+    <div class="stat-box">
+      <i class="fa-solid fa-fire"></i>
+      <h2>2000+</h2>
+      <p>Community Members</p>
+    </div>
+
+  </div>
+</section>
+                            <!-- 4th divison sliders -->
+
+    <div class="container-fluid" id="heading">
+
+  <h4>
+    <i class="fas fa-horse"></i>
+    &ensp;Explore Our Offerings&ensp;
+    <i class="fas fa-horse"></i>
+  </h4>
+
+  <h1 style="font-family:cursive;">Our Services</h1>
+
+  <!-- CAROUSEL -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+    <div class="carousel-inner">
+
+      <!-- SLIDE 1 -->
+      <div class="item active">
+        <div class="row text-center">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg" class="ph">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1699467367886-aab057167218" class="ph">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1672857997682-fb4f6c297985" class="ph">
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2 -->
+      <div class="item">
+        <div class="row text-center">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1415356838286-df6fd593e8b3" class="ph">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1682688759157-57988e10ffa8" class="ph">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1496165493909-5494251d69f7" class="ph">
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3 -->
+      <div class="item">
+        <div class="row text-center">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1486082570281-d942af5c39b7" class="ph">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1523212871629-97164b1685fb" class="ph">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img src="https://images.unsplash.com/photo-1530804458434-67fe207c3a71" class="ph">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTROLS -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+
+  </div>
+</div>
+                         <!-- 5th divison -->
+
+<section class="activities">
+
+<h1>camping activites</h1>
+
+<div class="cards">
+
+  <!-- 1 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1502259880721-8d1bd253e795?q=80&w=1887&auto=format&fit=crop">
+    <h3>Recreational Fishing</h3>
+    <p>
+      Most Idaho waters have year-round fishing seasons.
+      However, many rivers and streams and some lakes have special rules
+    </p>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1618244099363-8f22800c6f93?q=80&w=1935&auto=format&fit=crop">
+    <h3>Mountain Biking</h3>
+    <p>
+      We can accommodate everyone from a beginner and memorable
+      introduction to horse riding, to advanced riders
+    </p>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1686013097793-397fb2d6c612?q=80&w=1935&auto=format&fit=crop">
+    <h3>Kayaking and Canoeing</h3>
+    <p>
+      Kayaking is a low-impact activity that can improve your strength.
+      Kayaking can be done as a hobby or as a fun activity
+    </p>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <img src="https://plus.unsplash.com/premium_photo-1684888759266-ce3768052c80?q=80&w=1887&auto=format&fit=crop">
+    <h3>Soccer Drills</h3>
+    <p>
+      Our coaching staff is selected for their ability to challenge
+      young soccer players to improve and advance their playing skills
+    </p>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1541371341550-651a07baed67?q=80&w=1887&auto=format&fit=crop">
+    <h3>Horse Riding</h3>
+    <p>
+      We can accommodate everyone from a beginner and memorable
+      introduction to horse riding, to advanced riders
+    </p>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1501554728187-ce583db33af7?q=80&w=1887&auto=format&fit=crop">
+    <h3>Beginner’s Guide to Hiking</h3>
+    <p>
+      Hiking, walking in nature as a recreational activity.
+      Because hikers can walk as far as they want there is no physical strain
+    </p>
+  </div>
+
+</div>
+</section>
+
+                    <!-- 6th division -->
+<div class="container-fluid" >
+  <div class="row" >
+
+    <div class="col-lg-3 col-md-3 col-sm-12 dvbox">
+      <img src="https://images.pexels.com/photos/9467336/pexels-photo-9467336.jpeg" class="dvimg img-responsive center-block">
+      <h4 class="dvtext">Group Expeditions</h4>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 dvbox">
+      <img src="https://images.pexels.com/photos/1374064/pexels-photo-1374064.jpeg" class="dvimg img-responsive center-block">
+      <h4 class="dvtext">Adventure Tours</h4>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 dvbox">
+      <img src="https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg" class="dvimg img-responsive center-block">
+      <h4 class="dvtext">Wilderness Survival</h4>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 dvbox">
+      <img src="https://images.pexels.com/photos/6034148/pexels-photo-6034148.jpeg" class="dvimg img-responsive center-block">
+      <h4 class="dvtext">Guided Hikes</h4>
+    </div>
+
+  </div>
+</div>           
+                        <!-- 7th diivison -->
+
+
+<div class="container-fluid hgfd">
+
+	<!-- Heading -->
+	<div class="row">
+		<div class="col-12" id="hdline">
+			<div class="text-center">
+				<h2 class="txtclr">Special Features</h2>
+			</div>
+		</div>
+	</div>
+
+	<!-- Main Content -->
+	<div class="row">
+
+		<!-- Left Text Section -->
+		<div class="col-lg-4 col-md-4 col-sm-12 section-bg">
+
+			<div class="iconsline text-center">
+				<i class="fas fa-campground icons1"></i>
+				<h2 class="txtclr">Unique Camp Store</h2>
+				<p class="txtclr">
+					Snacks, soda, souvenirs, gifts, supplies,<br>
+					firewood, ice (no tobacco or alcohol available)
+				</p>
+			</div>
+
+			<div class="iconsline text-center">
+				<i class="fas fa-fire icons1"></i>
+				<h2 class="txtclr">Nightly Group Campfire</h2>
+				<p class="txtclr">
+					Join us for days of singing, cooking out on the campfire,
+					games, unique arts and crafts and so much more!
+				</p>
+			</div>
+
+			<div class="iconsline text-center">
+				<i class="fas fa-shower icons1"></i>
+				<h2 class="txtclr">Restrooms & Showers</h2>
+				<p class="txtclr">
+					Compact and easy to use. Place in a sunny location,
+					allowing the warmth of the sun to warm your shower water!
+				</p>
+			</div>
+
+		</div>
+
+		<!-- Image Section -->
+		<div class="col-lg-4 col-md-4 col-sm-12 section-bg">
+			<img src="https://images.unsplash.com/photo-1515822565665-f1462222eb4c?q=80&w=1887&auto=format&fit=crop"
+			     id="linesrc">
+		</div>
+
+		<!-- Right Text Section -->
+		<div class="col-lg-4 col-md-4 col-sm-12 section-bg">
+
+			<div class="iconsline text-center">
+				<i class="fas fa-wifi icons1"></i>
+				<h2 class="txtclr">Free Wireless Internet</h2>
+				<p class="txtclr">
+					We have 5 Wi-Fi antennas on the ground to cover camping and
+					allow you to remain “connected” via our network
+				</p>
+			</div>
+
+			<div class="iconsline text-center">
+				<i class="far fa-grin-alt icons1"></i>
+				<h2 class="txtclr">Playground</h2>
+				<p class="txtclr">
+					Come and enjoy traditional playground activities including
+					arts and crafts, sports and day trips
+				</p>
+			</div>
+
+			<div class="iconsline text-center">
+				<i class="fas fa-motorcycle icons1"></i>
+				<h2 class="txtclr">Bike Rentals</h2>
+				<p class="txtclr">
+					Planning an epic road ride into the mountains?
+					Campgrounds has the perfect rental bike for you
+				</p>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+</div>
+                        <!-- 8th didvison -->
+
+	<div class="container-fluid">
+	<div class="row">
+
+		<!-- 1st Column -->
+		<div class="col-lg-6 col-md-6 col-sm-6" id="moun">
+			<div class="text-center">
+
+				<h5 class="hd">Meet The Mountain Campground!</h5>
+
+				<p class="par">
+					The Mountain Campground is located near beautiful beaches,
+					golf courses, pristine rivers, casinos, Mystic CT, Watch Hill
+					and Westerly RI to enhance your camping experience.
+				</p>
+
+				<p class="par">
+					At our campground, you can enjoy RV Sites for all sizes of campers
+					and motorhomes as well as our fully equipped cottages!
+				</p>
+
+				<i class="fas fa-fire-alt ic"> fire woods</i>
+				<i class="fas fa-caravan ic"> camp rents</i>
+				<i class="fas fa-mountain ic"> hiking</i>
+
+			</div>
+		</div>
+
+		<!-- 2nd Column -->
+		<div class="col-lg-6 col-md-6 col-sm-6" id="moun">
+			<div class="text-center">
+				<img src="https://plus.unsplash.com/premium_photo-1676140621026-5c10ec3a875f?q=80&w=1887&auto=format&fit=crop"
+				     class="wlp" alt="Mountain Camp">
+			</div>
+		</div>
+
+	</div>
+</div>
+
+                <!-- 9th divison -->
+<div class="container-fluid">
+
+	<!-- Heading -->
+	<div class="row">
+		<div class="col-12 text-center">
+			<h2 class="outdoor"><b>Outdoor Recreation</b></h2>
+		</div>
+	</div>
+
+	<!-- Images -->
+	<div class="row">
+
+		<div class="col-lg-4 col-md-4 col-sm-12 out-box">
+			<img src="https://images.unsplash.com/photo-1525811902-f2342640856e?q=80&w=2071&auto=format&fit=crop"
+			     class="in-img">
+		</div>
+
+		<div class="col-lg-4 col-md-4 col-sm-12 out-box">
+			<img src="https://plus.unsplash.com/premium_photo-1681496294637-a9924d0a6080?q=80&w=2070&auto=format&fit=crop"
+			     class="in-img">
+		</div>
+
+		<div class="col-lg-4 col-md-4 col-sm-12 out-box">
+			<img src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1974&auto=format&fit=crop"
+			     class="in-img">
+		</div>
+
+		<div class="col-lg-4 col-md-4 col-sm-12 out-box">
+			<img src="https://images.unsplash.com/photo-1463693396721-8ca0cfa2b3b5?q=80&w=2070&auto=format&fit=crop"
+			     class="in-img">
+		</div>
+
+		<div class="col-lg-4 col-md-4 col-sm-12 out-box">
+			<img src="https://plus.unsplash.com/premium_photo-1682390303765-99613aaf096d?q=80&w=2070&auto=format&fit=crop"
+			     class="in-img">
+		</div>
+
+		<div class="col-lg-4 col-md-4 col-sm-12 out-box">
+			<img src="https://images.unsplash.com/photo-1682688759157-57988e10ffa8?q=80&w=2070&auto=format&fit=crop"
+			     class="in-img">
+		</div>
+
+	</div>
+</div>
+
+                    <!-- 10th didvison -->
+<div class="container-fluid rowmain">
+
+	<div class="row">
+
+		<!-- Card 1 -->
+		<div class="col-lg-4 col-md-4 col-sm-12 cardbox">
+			<img src="https://images.unsplash.com/photo-1444124818704-4d89a495bbae?q=80&w=2070&auto=format&fit=crop"
+			     class="overimg">
+
+			<div class="centered">Hiking & Summer</div>
+			<p class="centeredp">
+				Life Is Best When You're Camping. Life is better by the camp.
+				Campers have smore fun.
+			</p>
+		</div>
+
+		<!-- Card 2 -->
+		<div class="col-lg-4 col-md-4 col-sm-12 cardbox">
+			<img src="https://images.unsplash.com/photo-1496947850313-7743325fa58c?q=80&w=2070&auto=format&fit=crop"
+			     class="overimg">
+
+			<div class="centered">Family Holidays</div>
+			<p class="centeredp">
+				Happy holidays to my beloved family.
+				The best gift you've given me is our time together.
+			</p>
+		</div>
+
+		<!-- Card 3 -->
+		<div class="col-lg-4 col-md-4 col-sm-12 cardbox">
+			<img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=2070&auto=format&fit=crop"
+			     class="overimg">
+
+			<div class="centered">Hiking Holiday</div>
+			<p class="centeredp">
+				Finding peace one step at a time.
+				Just keep hiking. Peak moments.
+			</p>
+		</div>
+
+	</div>
+</div>
+                          <!-- 11th division -->
+
+
+   <div class="container">
+	<div class="row rowfull">
+
+		<!-- IMAGE 1 -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<div class="shelter">
+				<img src="https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?q=80&w=1974&auto=format&fit=crop"
+				     class="image">
+
+				<div class="overlay">
+					<i class="fas fa-landmark overlay-icon"></i>
+					<div class="rrr">Great Location</div>
+					<p class="overlay-text">
+						One of the most compelling aspects of hiking
+						is its accessibility for every kind of hiker.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- IMAGE 2 -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<div class="shelter">
+				<img src="https://images.unsplash.com/photo-1460518451285-97b6aa326961?q=80&w=2070&auto=format&fit=crop"
+				     class="image">
+
+				<div class="overlay">
+					<i class="fas fa-user-shield overlay-icon"></i>
+					<div class="rrr">Expert Guide</div>
+					<p class="overlay-text">
+						One of the most compelling aspects of hiking
+						is its accessibility for every kind of hiker.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- IMAGE 3 -->
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<div class="shelter">
+				<img src="https://plus.unsplash.com/premium_photo-1682390303366-7463dcbec281?q=80&w=2070&auto=format&fit=crop"
+				     class="image">
+
+				<div class="overlay">
+					<i class="fas fa-landmark overlay-icon"></i>
+					<div class="rrr">Safety Guide</div>
+					<p class="overlay-text">
+						One of the most compelling aspects of hiking
+						is its accessibility for every kind of hiker.
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+                            <!-- 12th division -->
+
+<div class="full-hero">
+  <div class="hero-row">
+
+    <div class="hero-column">
+
+      <div class="hero-image-section">
+        <img src="https://images.unsplash.com/photo-1534772861022-eddf45ef8aec?q=80&w=2074&auto=format&fit=crop"
+             class="hero-background-img">
+
+        <div class="hero-overlay-content">
+          <h2 class="hero-title">Uncover Hidden Wilderness Together!</h2>
+          <p class="hero-description">
+            Often celebrated as a harmonious union of physical activity and natural exploration
+            become an enriching journey for both body and mind.
+          </p>
+          <a href="{% url 'treking' %}" class="hero-action-btn">Book Now</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+                    <!-- <footer></footer> -->
+
+
+<!-- FOOTER -->
+<div class="container-fluid footer-section">
+  <div class="row no-gutter">
+
+    <!-- LINKS -->
+    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+      <div class="footer-content text-center">
+        <div class="headings"><b>Link</b></div>
+        <h5 class="gog">Home</h5>
+        <h5 class="gog">About</h5>
+        <h5 class="gog">Connect</h5>
+        <h5 class="gog">Login</h5>
+        <h5 class="gog">Corporate Tour</h5>
+      </div>
+    </div>
+
+    <!-- MAIN SECTION -->
+    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+      <div class="footer-content text-center">
+        <div class="headings"><b>Main Section</b></div>
+        <h5 class="gog">Package Tours</h5>
+        <h5 class="gog">Blog</h5>
+        <h5 class="gog">Company Profile</h5>
+        <h5 class="gog">Contact Us</h5>
+        <h5 class="gog">States of India</h5>
+      </div>
+    </div>
+
+    <!-- LEGAL POLICY -->
+    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+      <div class="footer-content text-center">
+        <div class="headings"><b>Legal Policy</b></div>
+        <h5 class="gog">Package Tours</h5>
+        <h5 class="gog">Terms & Conditions</h5>
+        <h5 class="gog">Disclaimer</h5>
+        <h5 class="gog">We Are Hiring</h5>
+        <h5 class="gog">Share Your Travel Experience</h5>
+      </div>
+    </div>
+
+    <!-- SOCIAL MEDIA -->
+    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+      <div class="footer-content text-center">
+        <div class="headings"><b>Social Media</b></div>
+        <div class="social-icons">
+         <a href="https://www.facebook.com/YourPage" target="_blank" class="fa fa-facebook"></a>
+          <a href="https://twitter.com/YourProfile" target="_blank" class="fa fa-twitter"></a>
+          <a href="https://plus.google.com/YourProfile" target="_blank" class="fa fa-google"></a>
+          <a href="https://www.linkedin.com/in/YourProfile" target="_blank" class="fa fa-linkedin"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center footer-bottom">
+      <hr class="hr">
+      <h4 class="mim">© Copyright 2024 - @Etech Institute. All rights reserved.</h4>
+    </div>
+
+  </div>
+</div> 
+<script src="script.js"></script>
+
+</body>
+</html>
