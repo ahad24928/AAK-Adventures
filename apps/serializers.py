@@ -8,6 +8,8 @@ class CountrySerializer(serializers.ModelSerializer):
 
 
 class TrekingSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False)
+
     class Meta:
         model = Treking
         fields = '__all__'

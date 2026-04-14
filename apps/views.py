@@ -1,9 +1,10 @@
+import requests
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Treking
 from .serializers import TrekingSerializer
-
 
 # -------- NORMAL VIEWS --------
 
@@ -22,6 +23,15 @@ def register(request):
 def news(request):
     return render(request, "apps/news.html")
 
+
+def treking_page(request):
+    api_url = "http://127.0.0.1:8000/api/treking/"
+    
+    response = requests.get(api_url)
+    data = response.json()
+
+    return render(request, "apps/treking.html", {"data": data})
+    
 
 # -------- API VIEWS --------
 
@@ -43,27 +53,28 @@ def treking_list(request):
         return Response(serializer.errors)  
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def treking_detail(request, id):
-
-    try:
-        trek = Treking.objects.get(id=id)
-    except Treking.DoesNotExist:
-        return Response({'error': 'Not found'})
+    treking = get_object_or_404(Treking, id=id)
 
     if request.method == 'GET':
-        serializer = TrekingSerializer(trek)
+        serializer = TrekingSerializer(treking)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = TrekingSerializer(trek, data=request.data)
-
+        serializer = TrekingSerializer(treking, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data)   
+        return Response(serializer.errors)
 
-        return Response(serializer.errors)   
+    elif request.method == 'PATCH':
+        serializer = TrekingSerializer(treking, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)   
+        return Response(serializer.errors)
 
     elif request.method == 'DELETE':
-        trek.delete()
-        return Response({'message': 'Deleted successfully'})
+        treking.delete()
+        return Response({"message": "Deleted successfully"})
