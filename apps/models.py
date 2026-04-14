@@ -25,3 +25,15 @@ class Treking(models.Model):
 
     def __str__(self):
         return self.name
+
+class Camping(models.Model):
+    namecamp = models.CharField(max_length=100)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    city = models.CharField(max_length=50)
+    price = models.IntegerField()
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    about = models.TextField()  
+    image = models.ImageField(upload_to='treking/', null=True, blank=True)
+
+    def __str__(self):
+        return self.namecamp

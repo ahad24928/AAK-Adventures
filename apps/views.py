@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Treking
-from .serializers import TrekingSerializer
+from .models import Treking, Camping
+from .serializers import TrekingSerializer, CampingSerializer
 
 # -------- NORMAL VIEWS --------
 
@@ -31,6 +31,14 @@ def treking_page(request):
     data = response.json()
 
     return render(request, "apps/treking.html", {"data": data})
+
+def camping_page(request):
+    api_url = "http://127.0.0.1:8000/api/camping/"
+    
+    response = requests.get(api_url)
+    data_camp = response.json()
+
+    return render(request, "apps/camping.html", {"data_camp": data_camp})
     
 
 # -------- API VIEWS --------
@@ -77,4 +85,50 @@ def treking_detail(request, id):
 
     elif request.method == 'DELETE':
         treking.delete()
+        return Response({"message": "Deleted successfully"})
+
+# camping api
+
+@api_view(['GET', 'POST'])
+def camping_list(request):
+
+    if request.method == 'GET':
+        data = Camping.objects.all()
+        serializer = CampingSerializer(data, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = CampingSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors) 
+
+
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
+def camping_detail(request, id):
+    camping = get_object_or_404(Camping, id=id)
+
+    if request.method == 'GET':
+        serializer = CampingSerializer(camping)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = CampingSerializer(camping, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)   
+        return Response(serializer.errors)
+
+    elif request.method == 'PATCH':
+        serializer = CampingSerializer(camping, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)   
+        return Response(serializer.errors)
+
+    elif request.method == 'DELETE':
+        camping.delete()
         return Response({"message": "Deleted successfully"})
