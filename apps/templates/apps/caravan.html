@@ -1,121 +1,59 @@
+{% extends 'apps/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %} Explore Adventure | AAK {% endblock %}
 
-<title>Caravan</title>
-
-<!-- Bootstrap 3 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- Google Material Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<!-- Font Awesome (latest) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-<!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- Custom CSS -->
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'apps/caravan.css' %}">
+{% endblock %}
 
-
-</head>
-<body>
-
-<div class="container-fluid" id="mainrow">
-
-<!-- HERO IMAGE -->
+{% block main %}
 <div class="container">
-<div id="vanrow">
-<img src="https://images.unsplash.com/photo-1516154155765-5e6e8e668b80" id="vanimg">
-</div>
+    <div class="text-center" style="margin-bottom:20px;">
+        <h2><b>Trekking Tours and Activities</b></h2>
+    </div>
 
-<!-- INTRO TEXT -->
-<div class="section-text">
-<h3>Hire a campervan for your next camping adventure</h3>
-<h3>Fully digital experience & competitive offers</h3>
-<p>
-roadsurfer is the motorhome and campervan hire expert in Europe and beyond.
-Enjoy your road trip in a cosy holiday home on wheels with everything included.
-</p>
-</div>
+    {% for item in data_caravan %}
+    <div class="row trek-row trek-card">
+        
+        <!-- Image -->
+        <div class="col-md-4">
+            <img src="http://127.0.0.1:8000{{ item.image }}" width="100%">
+        </div>
 
-<!-- CARDS -->
-<div class="row">
+        <!-- Details -->
+        <div class="col-md-5">
+            <h4>{{ item.name }}</h4>
 
-<div class="col-lg-4 col-md-4 col-sm-6">
-<div class="card-box">
-<img src="https://images.unsplash.com/photo-1705078368468-6e3a9f8de667">
-<h5>Camping- und Ferienpark Wulfener Hals</h5>
-<p>Top rating • Surfing • Families with children</p>
-</div>
-</div>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
+            <span class="fa fa-star stars"></span>
 
-<div class="col-lg-4 col-md-4 col-sm-6">
-<div class="card-box">
-<img src="https://images.unsplash.com/photo-1621872315260-d29289474c0a">
-<h5>Rosenfelder Strand Ostsee Camping</h5>
-<p>Top rating • Cycling • Family-friendly</p>
-</div>
-</div>
+            <p>{{ item.description }}</p>
 
-<div class="col-lg-4 col-md-4 col-sm-6">
-<div class="card-box">
-<img src="https://images.unsplash.com/photo-1563783850023-077d97825802">
-<h5>Campingpark Rerik</h5>
-<p>Baltic Sea • Cycling • Couples</p>
-</div>
-</div>
+            <i class='fas fa-clock'> Free Cancellation</i><br>
+            <i class='fas fa-check'> Recommended</i>
 
-<div class="col-lg-4 col-md-4 col-sm-6">
-<div class="card-box">
-<img src="https://images.unsplash.com/photo-1649851706700-56d3751fa9b1">
-<h5>Union Lido</h5>
-<p>Swimming • Families • Venice</p>
-</div>
-</div>
+            <br><br>
 
-<div class="col-lg-4 col-md-4 col-sm-6">
-<div class="card-box">
-<img src="https://images.unsplash.com/photo-1579451487071-84fbfea29fb0">
-<h5>EurCamping Roseto</h5>
-<p>Cycling • Couples • Abruzzo</p>
-</div>
-</div>
+            <!-- Button triggers modal -->
+            <button class="btn view-btn" data-toggle="modal" data-target="#modal{{ forloop.counter }}">
+                View
+            </button>
+        </div>
 
-<div class="col-lg-4 col-md-4 col-sm-6">
-<div class="card-box">
-<img src="https://images.unsplash.com/photo-1592837613666-07081d7f0213">
-<h5>Piomboni Camping Village</h5>
-<p>Swimming • Tent-friendly • Emilia-Romagna</p>
-</div>
-</div>
+        <!-- Price + Country -->
+        <div class="col-md-3">
+            <h4><b>Price</b></h4>
+            <h5>₹ {{ item.price }}</h5>
 
-</div>
-</div>
+            <h5><b>Country</b></h5>
+            <p>{{ item.country }}</p>
+        </div>
+    </div>
 
-<!-- SEA SECTION -->
-<div class="sea-section">
-<div class="container">
-<h2>Camping by the Sea in France</h2>
-<img src="https://images.unsplash.com/photo-1558980395-2f289089d3ec">
-<p>
-France offers stunning seaside camping—from the Atlantic coast to the Mediterranean.
-Destinations like the Côte d’Azur, Brittany, Normandy, and Corsica provide beaches,
-mountains, and unforgettable camping experiences.
-</p>
-</div>
-</div>
 
-</div>
 
-</body>
-</html>
+    {% endfor %}
+</div>
+{% endblock %}
