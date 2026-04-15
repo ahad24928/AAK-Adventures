@@ -18,7 +18,7 @@
         
         <!-- Image -->
         <div class="col-md-4">
-            <img src="http://127.0.0.1:8000{{ item.image }}" width="100%">
+            <img src="{{ item.image }}" width="100%">
         </div>
 
         <!-- Details -->
@@ -36,10 +36,9 @@
 
             <br><br>
 
-            <!-- Button triggers modal -->
-            <button class="btn view-btn" data-toggle="modal" data-target="#modal{{ forloop.counter }}">
-                View
-            </button>
+           <a href="{% url 'detail-page' 'caravan' item.id %}" class="btn btn-primary">
+                  View Details
+            </a>
         </div>
 
         <!-- Price + Country -->

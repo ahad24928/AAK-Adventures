@@ -82,15 +82,15 @@
     <div class="box-wrapper">
         <div class="box">
             <i class="fas fa-hiking"></i>
-          <h3 ><a href="/">trekking</a></h3>
+          <h3 ><a href="{% url 'treking_page' %}">trekking</a></h3>
         </div>
         <div class="box">
             <i class="fas fa-campground"></i>
-          <h3 ><a href="{% url 'login' %}">camping</a></h3>
+          <h3 ><a href="{% url 'camping_page' %}">camping</a></h3>
         </div>
         <div class="box">
             <i class="fas fa-caravan"></i>
-            <h3><a href="/apps/caravan/">caravan</a></h3>
+            <h3><a href="{% url 'caravan_page' %}">caravan</a></h3>
         </div>
         <div class="box">
             <i class="fas fa-fire"></i>
@@ -137,6 +137,39 @@
     </div>
   </div>
 
+</div>
+
+
+
+<!-- HOTEL -->
+<div class="container mt-4">
+  <div class="row hotel-card">
+
+    <div class="col-md-6">
+      <img src="{{ hotel.image.url }}" class="hotel-img">
+    </div>
+
+    <div class="col-md-6 hotel-info">
+      <h2>{{ hotel.name }}</h2>
+      <p><b>City:</b> {{ hotel.city }}</p>
+      <p><b>Country:</b> {{ hotel.country }}</p>
+      <p class="price">₹{{ hotel.price }}</p>
+      <p >A hotel is a commercial establishment providing lodging, meals, and
+         services to travelers. Descriptions typically highlight location, room types, amenities 
+         (pool, spa, gym), and services like concierge or dining. Key categories include luxury,
+          boutique, budget, and extended-stay hotels, often categorized by star ratings and size
+       </p>
+      <li>Services: Staff availability (24-hour concierge), valet parking, shuttle services,
+           and cleaning services.
+        </li> 
+      <li>Facilities: On-site restaurants, bars, swimming pools, fitness centers, meeting rooms, and spas</li>  
+
+      <button class="btn btn-main my-2" data-bs-toggle="modal" data-bs-target="#bookModal">
+        Book Now
+      </button>
+    </div>
+
+  </div>
 </div>
                             <!-- 3rd divison -->
 

@@ -1,5 +1,11 @@
 from django.urls import path
 from. import views
+from .views import (
+    trekingList, trekingDetail, 
+    campingList, campingDetail,
+    caravanList, caravanDetail
+) 
+
 
 urlpatterns = [
     # path("",views.base,name="apps"),
@@ -9,16 +15,19 @@ urlpatterns = [
      path('login/', views.login, name='login'),
      path('register/', views.register, name='register'),
      path('news/', views.news, name='news'),
-     path('treking-page/', views.treking_page, name='treking_page'),
-     path('camping-page/', views.camping_page, name='camping_page'),
-     path('caravan-page/', views.caravan_page, name='caravan_page'),
+     path('treking_page/', views.treking_page, name='treking_page'),
+     path('camping_page/', views.camping_page, name='camping_page'),
+     path('caravan_page/', views.caravan_page, name='caravan_page'),
+     path('detail/<str:type>/<int:pk>/', views.detail_page, name='detail-page'),
 
 
-     path('treking/', views.treking_list),
-     path('treking/<int:id>/', views.treking_detail),
-     path('camping/', views.camping_list),
-     path('camping/<int:id>/', views.camping_detail),
-     path('caravan/', views.caravan_list),
-     path('caravan/<int:id>/', views.caravan_detail),
+     path('treking/', trekingList.as_view(), name='treking-list'),
+     path('treking/<int:pk>/', trekingDetail.as_view(), name='treking-detail'),
+
+     path('camping/', views.campingList.as_view(), name='camping-list'),
+     path('camping/<int:pk>/', views.campingDetail.as_view(), name='camping-detail'),
+
+     path('caravan/', views.caravanList.as_view(), name='caravan-list'),
+     path('caravan/<int:pk>/', views.caravanDetail.as_view(), name='caravan-detail'),
 
     ]

@@ -27,3 +27,4 @@ class CaravanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Caravan
         fields = '__all__'
+
