@@ -1,30 +1,31 @@
 import requests
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Treking, Camping, Caravan
-from .serializers import TrekingSerializer, CampingSerializer, CaravanSerializer
+from .models import Treking, Camping, Caravan, Booking, Country
+from .serializers import TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer
 from rest_framework.generics import ListCreateAPIView , RetrieveUpdateDestroyAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import AllowAny
 
 # -------- NORMAL VIEWS --------
 
 def index(request):
-    return render(request, "apps/index.html", )
+    cities = Country.objects.all()
+    return render(request, "apps/index.html", {"cities": cities})
 
 def caravan(request):
     return render(request, "apps/caravan.html")
 
-def login(request):   
-    return render(request, "apps/login.html")
-
-def register(request):
-    return render(request, "apps/register.html")
-
 def news(request):
     return render(request, "apps/news.html")
+
+def adventure_page(request):
+    return render(request, "apps/adventure.html")
 
 
 def treking_page(request):
@@ -53,16 +54,17 @@ def caravan_page(request):
 
 
 def detail_page(request, type, pk):
-    if type == "trek":
-        obj = get_object_or_404(Treking, id=pk)
+    if type == "camping":
+        obj = Camping.objects.get(id=pk)
+    elif type == "treking":
+        obj = Treking.objects.get(id=pk)
+    else:
+        obj = Caravan.objects.get(id=pk)
 
-    elif type == "camp":
-        obj = get_object_or_404(Camping, id=pk)
-
-    else:  
-        obj = get_object_or_404(Caravan, id=pk)
-
-    return render(request, "apps/detail.html", {"obj": obj})
+    return render(request, "apps/detail.html", {
+        "obj": obj,
+        "type": type
+    })
 
 
 # -------- API VIEWS --------
@@ -97,3 +99,14 @@ class caravanList(ListCreateAPIView):
 class caravanDetail(RetrieveUpdateDestroyAPIView):
     queryset = Caravan.objects.all()
     serializer_class = CaravanSerializer
+
+class bookingCreate(CreateAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
+
+
+

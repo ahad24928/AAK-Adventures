@@ -1,58 +1,69 @@
 {% extends 'apps/base.html' %}
 {% load static %}
 
-{% block title %} Explore Adventure | AAK {% endblock %}
+{% block title %}Explore Adventure | AAK{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'apps/caravan.css' %}">
+<link rel="stylesheet" href="{% static 'apps/treking.css' %}">
 {% endblock %}
 
 {% block main %}
-<div class="container">
-    <div class="text-center" style="margin-bottom:20px;">
-        <h2><b>Trekking Tours and Activities</b></h2>
+
+<div class="page-container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1>Caravan Adventures</h1>
+        <p>Discover best trekking experiences with AAK Camps</p>
     </div>
 
+    <!-- LIST -->
     {% for item in data_caravan %}
-    <div class="row trek-row trek-card">
-        
-        <!-- Image -->
-        <div class="col-md-4">
-            <img src="{{ item.image }}" width="100%">
+    <div class="trek-card">
+
+        <!-- IMAGE -->
+        <div class="trek-image">
+            <img src="{{ item.image }}" alt="{{ item.name }}">
         </div>
 
-        <!-- Details -->
-        <div class="col-md-5">
-            <h4>{{ item.name }}</h4>
+        <!-- DETAILS -->
+        <div class="trek-details">
 
-            <span class="fa fa-star stars"></span>
-            <span class="fa fa-star stars"></span>
-            <span class="fa fa-star stars"></span>
+            <h2>{{ item.name }}</h2>
 
+            <!-- Rating -->
+            <div class="rating">
+                <span>★★★★☆</span>
+                <small>4.5 (120 reviews)</small>
+            </div>
+
+            <!-- Description -->
             <p>{{ item.description }}</p>
 
-            <i class='fas fa-clock'> Free Cancellation</i><br>
-            <i class='fas fa-check'> Recommended</i>
+            <!-- Features -->
+            <div class="features">
+                <span>✔ Free Cancellation</span>
+                <span>✔ Recommended</span>
+            </div>
 
-            <br><br>
-
-           <a href="{% url 'detail-page' 'caravan' item.id %}" class="btn btn-primary">
-                  View Details
+            <!-- Button -->
+            <a href="{% url 'detail-page' 'caravan' item.id %}" class="btn">
+                View Details
             </a>
         </div>
 
-        <!-- Price + Country -->
-        <div class="col-md-3">
-            <h4><b>Price</b></h4>
-            <h5>₹ {{ item.price }}</h5>
+        <!-- PRICE -->
+        <div class="trek-price">
+            <h3>Price</h3>
+            <h2>₹{{ item.price }}</h2>
 
-            <h5><b>Country</b></h5>
-            <p>{{ item.country }}</p>
+            <h4> {{ item.city }}</h4>
+            
         </div>
+
     </div>
-
-
-
     {% endfor %}
+
 </div>
+
 {% endblock %}

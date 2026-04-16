@@ -20,7 +20,7 @@ def login(request):
 
 		if user is not None:
 			auth.login(request, user)
-			return redirect('/apps/treking/')
+			return redirect('index')
 		else:
 			messages.info(request, 'invalid login details')
 			return redirect('login')

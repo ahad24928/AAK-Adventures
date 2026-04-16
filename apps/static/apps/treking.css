@@ -1,71 +1,151 @@
-body {
-    background-color:#3f536c;
+/* GLOBAL */
+body{
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #fff;
+    color: #fff;
 }
 
-/* Trek rows */
-.trek-row {
-    background-color: #070912;
-;
-    padding: 20px 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+/* PAGE CONTAINER */
+.page-container{
+    width: 90%;
+    margin: auto;
+    padding: 30px 0;
 }
 
-/* Trek card */
-.trek-card img {
+/* HEADER */
+.page-header{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1{
+    font-size: 36px;
+    margin-bottom: 5px;
+    color:  #0f172a;
+}
+
+.page-header p{
+    color: #0f172a;
+}
+
+/* CARD */
+.trek-card{
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 1fr;
+    gap: 20px;
+    background: #111827;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.trek-card:hover{
+    transform: translateY(-5px);
+}
+
+/* IMAGE */
+.trek-image img{
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 12px;
 }
-.trek-card h4 {
-    font-size: 18px;
-    font-weight: bold;
+
+/* DETAILS */
+.trek-details h2{
+    font-size: 22px;
+    margin-bottom: 8px;
 }
-.trek-card p {
+
+.rating{
+    color: #fbbf24;
+    margin-bottom: 10px;
+}
+
+.rating small{
+    color: #94a3b8;
+    margin-left: 10px;
+}
+
+.trek-details p{
+    color: #cbd5e1;
     font-size: 14px;
+    line-height: 1.5;
 }
-.stars {
+
+/* FEATURES */
+.features{
+    margin: 10px 0;
+}
+
+.features span{
+    display: inline-block;
+    background: #1f2937;
+    padding: 5px 10px;
+    border-radius: 20px;
     font-size: 12px;
-    color: darkorange;
+    color: #34d399;
+    margin-right: 8px;
 }
-.stars-gray {
-    font-size: 12px;
-    color: gray;
-}
-.trek-card button {
-    width: 100%;
-    background-color: #3f536c;
-    color: white;
+
+/* BUTTON */
+.btn{
+    display: inline-block;
     margin-top: 10px;
+    padding: 10px 14px;
+    background: #22c55e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-/* Modal */
-.modal-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 5px;
-}
-.modal-header-text {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-.modal-col {
-    padding: 10px;
-}
-h2, h4, h5 {
-    color: darkgrey; /* dark blue, change to any color you like */
+.btn:hover{
+    background: #16a34a;
 }
 
-p, i, span {
-    color: darkgrey; /* dark grey, change as you prefer */
+/* PRICE BOX */
+.trek-price{
+    text-align: right;
 }
-#genericModal .modal-body, 
-#genericModal .modal-body h5, 
-#genericModal .modal-body p, 
-#genericModal .modal-body i, 
-#genericModal .modal-body span {
-    color: #2c3e50; /* Change this to any color you like */
+
+.trek-price h3{
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.trek-price h2{
+    font-size: 24px;
+    color: #fff;
+    margin: 5px 0;
+}
+
+.trek-price h4{
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.trek-price p{
+    color: #cbd5e1;
+}
+
+/* RESPONSIVE */
+@media(max-width: 992px){
+    .trek-card{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .trek-price{
+        text-align: center;
+    }
+
+    .trek-image img{
+        height: 220px;
+    }
 }

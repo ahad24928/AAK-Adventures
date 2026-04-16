@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Treking, Country, Camping, Caravan
+from .models import Treking, Country, Camping, Caravan, Booking
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,3 +28,7 @@ class CaravanSerializer(serializers.ModelSerializer):
         model = Caravan
         fields = '__all__'
 
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Booking
+        fields = '__all__'

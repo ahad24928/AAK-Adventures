@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Country(models.Model):
-    country = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='countries/', null=True, blank=True)  
     description = models.TextField(blank=True, null=True)
     
 
     def __str__(self):
-        return self.country
+        return self.name
 
 class Treking(models.Model):
     name = models.CharField(max_length=100)
@@ -52,3 +52,26 @@ class Caravan(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Booking(models.Model):
+    TYPE_CHOICES = (
+        ('treking', 'Treking'),
+        ('camping', 'Camping'),
+        ('caravan', 'Caravan'),
+    )
+    
+    user_name = models.CharField(max_length=100)
+    user_email = models.EmailField()
+    phone = models.CharField(max_length=15)
+
+    booking_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    item_id = models.IntegerField()
+
+    check_in = models.DateField()
+    check_out = models.DateField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user_name} - {self.booking_type}"
