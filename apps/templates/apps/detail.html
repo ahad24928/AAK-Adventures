@@ -1,159 +1,234 @@
 {% extends 'apps/base.html' %}
-{% load static %}
+{% load static humanize %}
 
 {% block title %}Details | AAK Camps{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'apps/detail.css' %}">
-
 {% endblock %}
 
 {% block main %}
 
 <div class="container">
 
-    <!-- ================= TOP DETAIL ================= -->
-    <div class="detail-wrapper">
+<!-- ================= TOP DETAIL ================= -->
+<div class="detail-wrapper">
 
-        <!-- IMAGE -->
-        <div class="detail-img">
-            <img src="{{ obj.image.url }}">
+    <div class="detail-img">
+        <img src="{{ obj.image.url }}">
+    </div>
+
+    <div class="detail-info">
+
+        <div class="title">{{ obj.name }}</div>
+        <div class="price">₹ {{ obj.price }}</div>
+
+        <p class="desc">{{ obj.description }} {{ obj.about }}</p>
+
+        <div class="box">
+            <p><b>City:</b> {{ obj.city }}</p>
+            <p><b>Phone:</b> {{ obj.phone }}</p>
         </div>
 
-        <!-- INFO -->
-        <div class="detail-info">
+        <!-- BOOKING BUTTON -->
+        <div class="book-box">
+            <h4>Instant Booking</h4>
+            <p style="font-size:12px;color:#94a3b8;">
+                Free cancellation • Secure booking • Instant confirmation
+            </p>
 
-            <div class="title">{{ obj.name }}</div>
+            {% if user.is_authenticated %}
+            <button class="book-btn" data-toggle="modal" data-target="#bookingModal">
+            {% else %}
+            <button class="book-btn" onclick="loginRequired()">
+            {% endif %}
+                Book Now
+            </button>
 
-            <div class="price">₹ {{ obj.price }}</div>
-
-            <p class="desc">{{ obj.description }} {{ obj.about }}</p>
-
-            <div class="box">
-                <p><b>City:</b> {{ obj.city }}</p>
-                <p><b>Phone:</b> {{ obj.phone }}</p>
-            </div>
-
-            <div class="book-box">
-                <h4>Instant Booking</h4>
-                <p style="font-size:12px;color:#94a3b8;">
-                    Free cancellation • Secure booking • Instant confirmation
-                </p>
-
-                <button class="book-btn" data-toggle="modal" data-target="#bookingModal">
-                    Book Now
-                </button>
-            </div>
-
+            <div id="loginMsg"></div>
         </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- ================= INFO ================= -->
+
+<div class="info-section">
+
+<h3 class="section-title">Experience Details</h3>
+
+<div class="info-grid">
+
+    <div class="info-card">
+        <h4>Description</h4>
+        <p>{{ obj.description }}</p>
+        <p>{{ obj.about }}</p>
+    </div>
+
+    <div class="info-card">
+        <h4>Events</h4>
+        <p>
+            {% if obj.events %}
+                {{ obj.events }}
+            {% else %}
+                Adventure activities included.
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h4>Amenities</h4>
+        <p>
+            {% if obj.amenties %}
+                {{ obj.amenties }}
+            {% else %}
+                Basic facilities available.
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h4>Availability</h4>
+        <p>
+            {% if obj.available_from and obj.available_to %}
+                {{ obj.available_from }} → {{ obj.available_to }}
+            {% else %}
+                Available all year
+            {% endif %}
+        </p>
     </div>
 
 </div>
 
-<!-- ================= BOTTOM INFO ================= -->
-<div class="info-section">
+</div>
 
-    <h3 class="section-title">Experience Details</h3>
+<!-- ================= REVIEWS ================= -->
 
-    <div class="info-grid">
+<div class="container reviews-section">
 
-        <div class="info-card">
-            <h4>Description</h4>
-            <p>{{ obj.description }}</p>
-            <p>{{ obj.about }}</p>
+<h4 class="fw-bold mb-3">Guest Reviews</h4>
+
+{% if user.is_authenticated %}
+<div class="review-card">
+    <form method="POST" action="{% url 'add_comment' type obj.id %}">
+        {% csrf_token %}
+        <textarea name="content" class="form-control reply-input mb-2" rows="3" placeholder="Write your review..." required></textarea>
+        <div class="text-end">
+            <button class="btn btn-reply">Post</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+
+{% if comments %}
+{% for comment in comments %}
+
+<div class="review-card">
+
+    <div class="review-header">
+        <div class="review-avatar">
+            {{ comment.user.first_name|slice:":1" }}
         </div>
 
-        <div class="info-card">
-            <h4>Events / Activities</h4>
-            <p>
-                {% if obj.events %}
-                    {{ obj.events }}
-                {% else %}
-                    Adventure activities included during trip.
-                {% endif %}
-            </p>
+        <div class="review-user">
+            <strong>{{ comment.user.first_name }}</strong><br>
+            <span class="review-time">
+                {{ comment.created_at|naturaltime }}
+            </span>
         </div>
-
-        <div class="info-card">
-            <h4>Amenities</h4>
-            <p>
-                {% if obj.amenties %}
-                    {{ obj.amenties }}
-                {% else %}
-                    Basic facilities available.
-                {% endif %}
-            </p>
-        </div>
-
-        <div class="info-card">
-            <h4>Availability</h4>
-            <p>
-                {% if obj.available_from and obj.available_to %}
-                    {{ obj.available_from }} → {{ obj.available_to }}
-                {% else %}
-                    Available all year (subject to weather)
-                {% endif %}
-            </p>
-        </div>
-
     </div>
+
+    <div class="review-text">
+        {{ comment.content }}
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="reply-box">
+        <form method="POST" action="{% url 'add_comment' type obj.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+            <textarea name="content" class="form-control reply-input mb-2" rows="2" placeholder="Write reply..." required></textarea>
+            <button class="btn btn-reply">Reply</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <div class="reply-list">
+        {% for reply in comment.replies.all %}
+        <div class="review-header">
+            <div class="review-avatar small">
+                {{ reply.user.first_name|slice:":1" }}
+            </div>
+
+            <div class="review-user">
+                <strong>{{ reply.user.first_name }}</strong><br>
+                <span class="review-time">
+                    {{ reply.created_at|naturaltime }}
+                </span>
+            </div>
+        </div>
+
+        <div class="review-text small">
+            {{ reply.content }}
+        </div>
+        {% empty %}
+        <p class="no-comment small">No replies yet</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endfor %}
+{% else %}
+<p class="no-comment">No comments yet.</p>
+{% endif %}
+
 </div>
 
 <!-- ================= BOOKING MODAL ================= -->
+
 <div id="bookingModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-md">
 
-    <div class="modal-content">
+    <div class="booking-modal-content">
 
-      <div class="modal-header">
+      <div class="booking-modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4>Complete Your Booking</h4>
-        <small style="color:#94a3b8;">Fill details to confirm instantly</small>
       </div>
 
-      <div class="modal-body">
+      <div class="booking-modal-body">
 
         <form id="bookingForm">
 
             <input type="hidden" id="type" value="{{ type }}">
             <input type="hidden" id="item_id" value="{{ obj.id }}">
 
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="name" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="email" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label>Phone</label>
-                <input type="text" id="phone" class="form-control" required>
-            </div>
+            <input type="text" id="name" class="booking-input" placeholder="Name" required>
+            <input type="email" id="email" class="booking-input" placeholder="Email" required>
+            <input type="text" id="phone" class="booking-input" placeholder="Phone" required>
 
             <div class="row">
                 <div class="col-md-6">
-                    <label>Check In</label>
-                    <input type="date" id="check_in" class="form-control" required>
+                    <input type="date" id="check_in" class="booking-input" required>
                 </div>
-
                 <div class="col-md-6">
-                    <label>Check Out</label>
-                    <input type="date" id="check_out" class="form-control" required>
+                    <input type="date" id="check_out" class="booking-input" required>
                 </div>
             </div>
 
             <br>
 
-            <button type="submit" class="btn btn-success btn-block">
+            <!-- CORRECT BUTTON -->
+            <button type="submit" class="booking-btn">
                 Confirm Booking
             </button>
 
         </form>
 
-        <div id="msg" style="margin-top:10px;"></div>
+        <div id="msg"></div>
 
       </div>
 
@@ -163,71 +238,28 @@
 </div>
 
 <!-- ================= JS ================= -->
+
 <script>
-const form = document.getElementById("bookingForm");
-const msgBox = document.getElementById("msg");
+function loginRequired(){
+    let msg = document.getElementById("loginMsg");
 
-form.addEventListener("submit", async function(e){
-    e.preventDefault();
+    msg.innerHTML = `
+        <div style="
+            margin-top:10px;
+            padding:10px;
+            background:darkgrey;
+            color:black;
+            border-radius:8px;
+            font-size:13px;
+        ">
+            ⚠ Please login to your account first
+        </div>
+    `;
 
-    msgBox.innerHTML = "";
-
-    let checkIn = document.getElementById("check_in").value;
-    let checkOut = document.getElementById("check_out").value;
-
-    if (!checkIn || !checkOut || checkOut <= checkIn) {
-        msgBox.innerHTML = `<div class="alert alert-danger">❌ Invalid Dates</div>`;
-        return;
-    }
-
-    let typeMap = {
-        "trek": "treking",
-        "treking": "treking",
-        "camp": "camping",
-        "camping": "camping",
-        "caravan": "caravan"
-    };
-
-    let rawType = document.getElementById("type").value.toLowerCase();
-    let bookingType = typeMap[rawType] || rawType;
-
-    let data = {
-        user_name: document.getElementById("name").value,
-        user_email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        booking_type: bookingType,
-        item_id: parseInt(document.getElementById("item_id").value),
-        check_in: checkIn,
-        check_out: checkOut
-    };
-
-    try {
-        let response = await fetch("/api/booking/", {
-            method: "POST",
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(data)
-        });
-
-        let res = await response.json();
-
-        if (!response.ok) {
-            msgBox.innerHTML = `<div class="alert alert-danger">❌ Booking Failed</div>`;
-            return;
-        }
-
-        msgBox.innerHTML = `<div class="alert alert-success">✅ Booking Successful!</div>`;
-
-        form.reset();
-
-        // auto close modal after success
-        setTimeout(() => {
-            $('#bookingModal').modal('hide');
-        }, 1200);
-
-    } catch (error) {
-        msgBox.innerHTML = `<div class="alert alert-danger">❌ Server Error</div>`;
-    }
-});
+    setTimeout(()=>{
+        window.location.href = "{% url 'login' %}";
+    }, 1500);
+}
 </script>
 
 {% endblock %}

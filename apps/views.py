@@ -1,22 +1,28 @@
 import requests
+#  DJANGO  IMPORTS
 from datetime import datetime
-from django.shortcuts import redirect, render
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+#  DJANGO REST FRAMEWORK IMPORTS
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Treking, Camping, Caravan, Booking, Country
-from .serializers import TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer
-from rest_framework.generics import ListCreateAPIView , RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView)
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.authentication import (SessionAuthentication, BasicAuthentication)
+from rest_framework.permissions import (AllowAny, IsAuthenticated)
+#  LOCAL APP IMPORTS
+from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment)
+from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer)
+
+
 
 # -------- NORMAL VIEWS --------
-
 def index(request):
     cities = Country.objects.all()
-    return render(request, "apps/index.html", {"cities": cities})
+    rent = Caravan.objects.all()
+
+    return render(request, "apps/index.html", {"cities": cities, "rent":rent})
 
 def caravan(request):
     return render(request, "apps/caravan.html")
@@ -61,11 +67,50 @@ def detail_page(request, type, pk):
     else:
         obj = Caravan.objects.get(id=pk)
 
+    comments = HotelComment.objects.filter(
+        item_type=type,
+        item_id=pk,
+        parent__isnull=True
+    ).order_by('-created_at')
+
     return render(request, "apps/detail.html", {
         "obj": obj,
-        "type": type
+        "type": type,
+        "comments": comments
     })
 
+@login_required(login_url='login')
+def add_comment(request, type, pk):
+    if request.method == "POST":
+        content = request.POST.get("content")
+        parent_id = request.POST.get("parent_id")
+
+        parent = None
+        if parent_id:
+            parent = get_object_or_404(HotelComment, id=parent_id)
+
+        HotelComment.objects.create(
+            user=request.user,
+            item_type=type,
+            item_id=pk,
+            content=content,
+            parent=parent
+        )
+
+        messages.success(request, "Comment added successfully")
+
+    return redirect('detail-page', type=type, pk=pk)
+
+@login_required(login_url='login')
+def my_bookings(request):
+    bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
+
+    total_bookings = bookings.count()
+
+    return render(request, "apps/my_bookings.html", {
+        "bookings": bookings,
+        "total_bookings": total_bookings
+    })
 
 # -------- API VIEWS --------
 
@@ -103,10 +148,9 @@ class caravanDetail(RetrieveUpdateDestroyAPIView):
 class bookingCreate(CreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]
 
-    authentication_classes = []
-    permission_classes = [AllowAny]
-
+    
 
 
 

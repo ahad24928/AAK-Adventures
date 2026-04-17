@@ -136,36 +136,150 @@
     }
 }
 
-/* ================= MODAL ================= */
-.modal-content{
-    border-radius: 15px;
-    overflow: hidden;
+/* ===================== REVIEWS (MODERN DARK) ===================== */
+/* ===================== REVIEWS SIMPLE CLEAN ===================== */
+
+.reviews-section {
+    margin-top: 40px;
 }
 
-.modal-header{
-    background:#0f172a;
-    color:white;
-    border-radius: 15px 15px 0 0;
+/* CARD */
+.review-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
-.modal-header .close{
-    color:white;
+/* HEADER */
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
-.form-group label{
-    font-size: 13px;
+/* AVATAR */
+.review-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
     color: #374151;
 }
 
-.form-control{
-    border-radius: 8px;
-    box-shadow: none !important;
+/* USER */
+.review-user {
+    margin-left: 10px;
 }
 
-.btn-success{
-    background: #22c55e;
+.review-user strong {
+    font-size: 14px;
+    color: #111827;
+}
+
+.review-time {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* TEXT */
+.review-text {
+    font-size: 14px;
+    color: #374151;
+    margin-top: 5px;
+}
+
+/* INPUT */
+.reply-input {
+    border-radius: 8px;
+    font-size: 13px;
+    border: 1px solid #d1d5db;
+}
+
+/* BUTTON */
+.btn-reply {
+    background: #111827;
+    color: #fff;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 5px 14px;
+    margin-top: 10px;
+}
+
+.btn-reply:hover {
+    background: #374151;
+}
+
+/* REPLIES */
+.reply-list {
+    margin-top: 10px;
+    padding-left: 30px;
+    border-left: 2px solid #e5e7eb;
+}
+
+/* EMPTY TEXT */
+.no-comment {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+/* ================= MODAL ================= */
+.booking-modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+/* HEADER */
+.booking-modal-header {
+    background: #0f172a;
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.booking-modal-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+.booking-modal-header .close {
+    color:#111;
+    opacity: 0.6;
+}
+
+/* BODY */
+.booking-modal-body {
+    padding: 15px;
+}
+
+/* INPUT */
+.booking-input {
+    width: 100%;
+    margin-bottom: 10px;
     padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 13px;
+}
+
+/* BUTTON */
+.booking-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #22c55e;
+    color: white;
     font-weight: 600;
+}
+
+.booking-btn:hover {
+    background: #16a34a;
 }

@@ -32,14 +32,17 @@
 
                      <!-- navbar -->
                 
-   <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
+
     <div class="navbar-header">
       <a class="navbar-brand" href="#">AAK Camps</a>
     </div>
 
+    <!-- LEFT MENU -->
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
+
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           More <span class="caret"></span>
@@ -49,20 +52,54 @@
           <li><a href="/">Caravan information</a></li>
         </ul>
       </li>
+
       <li><a href="{% url 'news' %}">Reports</a></li>
     </ul>
 
+    <!-- RIGHT MENU -->
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="{% url 'register' %}">
-        <span class="glyphicon glyphicon-user"></span> Sign Up
-      </a></li>
-      <li><a href="{% url 'login' %}">
-        <span class="glyphicon glyphicon-log-in"></span> Login
-      </a></li>
+
+      {% if user.is_authenticated %}
+
+
+        <!-- USER -->
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-user"></span>
+            {{ user.username }}
+          </a>
+        </li>
+
+        <!-- LOGOUT -->
+        <li>
+          <a href="{% url 'logout' %}">
+            <span class="glyphicon glyphicon-log-out"></span>
+            Logout
+          </a>
+        </li>
+
+      {% else %}
+
+        <li>
+          <a href="{% url 'register' %}">
+            <span class="glyphicon glyphicon-user"></span>
+            Sign Up
+          </a>
+        </li>
+
+        <li>
+          <a href="{% url 'login' %}">
+            <span class="glyphicon glyphicon-log-in"></span>
+            Login
+          </a>
+        </li>
+
+      {% endif %}
+
     </ul>
+
   </div>
 </nav>
-
                                     <!-- image -->
 <section class="hero">
     <div class="hero-content">
@@ -287,10 +324,52 @@
 
 	</div>
 </div>
-                       
+          
+                 <!-- 6th divison -->
+<div class="slider-wrapper">
 
+  <h2 class="slider-heading">Rent a Luxury Caravan</h2>
 
-                <!-- 6th divison -->
+  <!-- Buttons -->
+  <div class="slider-buttons">
+    <button class="nav-btn" onclick="moveSlider(-1)">
+      &#10094;
+    </button>
+
+    <button class="nav-btn" onclick="moveSlider(1)">
+      &#10095;
+    </button>
+  </div>
+
+  <!-- Slider -->
+  <div class="slider-track" id="sliderTrack">
+
+    {% for caravan in rent %}
+    <a href="{% url 'detail-page' 'caravan' caravan.id %}" class="card-link">
+
+      <div class="card-box">
+
+        {% if caravan.image %}
+          <img src="{{ caravan.image.url }}" alt="{{ caravan.name }}">
+        {% else %}
+          <img src="/static/default.jpg" alt="">
+        {% endif %}
+
+        <div class="card-overlay">
+          <span class="badge-top">TOP</span>
+          <h3>{{ caravan.name }}</h3>
+          <p>{{ caravan.description|truncatechars:80 }}</p>
+        </div>
+
+      </div>
+
+    </a>
+    {% endfor %}
+
+  </div>
+</div>
+
+                <!-- 7th divison -->
 <div class="container-fluid">
 
 	<!-- Heading -->
@@ -338,7 +417,7 @@
 
    
 
-                            <!-- 7th division -->
+                            <!-- 8th division -->
 
 <div class="full-hero">
   <div class="hero-row">
@@ -439,6 +518,22 @@ function scrollExplore(direction) {
         behavior: "smooth"
     });
 }
+
+function moveSlider(direction) {
+  const slider = document.getElementById("sliderTrack");
+
+  if (!slider) {
+    console.log("Slider not found ❌");
+    return;
+  }
+
+  slider.scrollBy({
+    left: direction * 300,
+    behavior: "smooth"
+  });
+}
+
 </script>
+
 </body>
 </html>
