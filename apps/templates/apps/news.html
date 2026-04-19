@@ -1,146 +1,134 @@
+{% extends 'apps/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}News & Events | AAK Camps{% endblock %}
 
-<title>News and adventures</title>
-
-<!-- Bootstrap 3 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- Google Material Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<!-- Font Awesome (latest) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-<!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- Custom CSS -->
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'apps/news.css' %}">
+{% endblock %}
 
+{% block main %}
 
-</head>
-<body>
+<div class="news-container">
 
-<!-- NAVBAR -->
-<div class="topnav">
-    <a class="active" href="/apps/index/">Home</a>
-    <a href="/apps/news/">News</a>
-</div>
+    <!-- HERO FEATURED NEWS -->
+    <div class="hero-news">
 
-<div class="container">
+        <img src="{{ news.0.image.url }}" alt="featured">
 
-<!-- MAIN CONTENT -->
-<div id="mainrow">
+        <div class="hero-overlay">
+            <span class="tag">Featured</span>
 
-<h1><b>Top Hikes in Europe According to Reports</b></h1>
-<p class="para text-center">
-Our favourite multi-day hikes in Europe, from the snowy Alps to the volcanic coastline of Madeira
-</p>
+            <h1>{{ news.0.title }}</h1>
 
-<img src="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg" class="oneimg">
+            <p>{{ news.0.description|truncatechars:160 }}</p>
 
-<div class="row">
-<div class="col-lg-2"></div>
-<div class="col-lg-8">
+            <button onclick="openModal(
+                '{{ news.0.title|escapejs }}',
+                '{{ news.0.image.url }}',
+                '{{ news.0.description|escapejs }}',
+                '{{ news.0.location|escapejs }}'
+            )">
+                Read More
+            </button>
+        </div>
+    </div>
 
-<p class="paramn"><b>
-The best treks in Europe take you through the Swiss Alps, the Canary Islands, the forests of Sweden,
-and the highlands of Scotland.
-</b></p>
+    <!-- PRESS RELEASES -->
+    <div class="section-head">
+        <h2>Press Releases</h2>
+        <a href="#" class="view-all">View all</a>
+    </div>
 
-<p class="paramn"><b>
-Europe has over 40 countries, 10 major mountain ranges, and more than 500 national parks.
-</b></p>
+    <div class="card-row">
 
-<p class="paramn"><b>
-Here are some of our top picks:
-</b></p>
+        {% for item in news|slice:"1:4" %}
+        <div class="news-card">
 
-<p class="para">1. The Spaghetti Tour of Monte Rosa (Italy)</p>
-<p class="para">2. Peaks of the Balkans Circuit</p>
-<p class="para">3. Vindios Loop – Spain</p>
-<p class="para">4. Tour de Mont Blanc – France</p>
-<p class="para">5. Selvaggio Blu Trail – Sardinia</p>
-<p class="para">6. Transcaucasian Trail – Georgia</p>
+            <div class="img">
+                <img src="{{ item.image.url }}">
+            </div>
 
-<h1><b>The Best Multi-Day Hikes in Europe</b></h1>
+            <div class="text">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description|truncatechars:90 }}</p>
 
-<img src="https://images.unsplash.com/photo-1532714489392-e56d9a07a555" class="mdlimg">
+                <button onclick="openModal(
+                    '{{ item.title|escapejs }}',
+                    '{{ item.image.url }}',
+                    '{{ item.description|escapejs }}',
+                    '{{ item.location|escapejs }}'
+                )">
+                    Read
+                </button>
+            </div>
 
-<p class="paramn"><b>
-Monte Rosa (4554m) contains the most land above 4000m in the Alps and offers incredible trekking routes.
-</b></p>
+        </div>
+        {% endfor %}
 
-<h1><b>The Madeira Coast to Coast Trek, Portugal</b></h1>
+    </div>
 
-<img src="https://images.unsplash.com/photo-1585173847038-1cfe1954c10a" class="mdlimg">
+    <!-- ALL NEWS GRID -->
+    <div class="section-head">
+        <h2>Travel Inspiration</h2>
+        <a href="#" class="view-all">View all</a>
+    </div>
 
-<p class="paramn"><b>
-Madeira offers beautiful coast-to-coast hiking with ocean views, forests, and dramatic cliffs.
-</b></p>
+    <div class="grid">
 
-</div>
-<div class="col-lg-2"></div>
-</div>
-</div>
+        {% for item in news %}
+        <div class="grid-card">
 
-<!-- EVENTS SECTION -->
-<div id="row2">
-<h1><b>Best Hiking Events in 2024</b></h1>
+            <img src="{{ item.image.url }}">
 
-<img src="https://plus.unsplash.com/premium_photo-1673240367277-e1d394465b56" id="img2">
+            <div class="grid-content">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description|truncatechars:100 }}</p>
 
-<div class="row">
+                <button onclick="openModal(
+                    '{{ item.title|escapejs }}',
+                    '{{ item.image.url }}',
+                    '{{ item.description|escapejs }}',
+                    '{{ item.location|escapejs }}'
+                )">
+                    Read More
+                </button>
+            </div>
 
-<div class="col-lg-4 col-md-4 col-sm-6 event-card text-center">
-<img src="https://plus.unsplash.com/premium_photo-1673240367277-e1d394465b56" id="img3">
-<h3><b>KitzAlpHike</b></h3>
-<p>11-hour, 22km trek through the Kitzbühel Alps.</p>
-</div>
+        </div>
+        {% endfor %}
 
-<div class="col-lg-4 col-md-4 col-sm-6 event-card text-center">
-<img src="https://plus.unsplash.com/premium_photo-1673240367277-e1d394465b56" id="img3">
-<h3><b>Ebbs Koasa March</b></h3>
-<p>Annual highlight with multiple walking routes.</p>
-</div>
-
-<div class="col-lg-4 col-md-4 col-sm-6 event-card text-center">
-<img src="https://plus.unsplash.com/premium_photo-1673240367277-e1d394465b56" id="img3">
-<h3><b>Schatzberg March</b></h3>
-<p>Legendary summer walking event in Wildschönau.</p>
-</div>
-
-<div class="col-lg-4 col-md-4 col-sm-6 event-card text-center">
-<img src="https://plus.unsplash.com/premium_photo-1676218968741-8179dd7e533f" id="img3">
-<h3><b>Silvretta March</b></h3>
-<p>Challenging alpine walk through rugged landscapes.</p>
-</div>
-
-<div class="col-lg-4 col-md-4 col-sm-6 event-card text-center">
-<img src="https://images.unsplash.com/photo-1502085671122-2d218cd434e6" id="img3">
-<h3><b>Zillertal Steinbock March</b></h3>
-<p>Classic Alpine long-distance walk held for 50+ years.</p>
-</div>
-
-<div class="col-lg-4 col-md-4 col-sm-6 event-card text-center">
-<img src="https://images.unsplash.com/photo-1498855926480-d98e83099315" id="img3">
-<h3><b>Ötztal Glacier Flea Walk</b></h3>
-<p>High-alpine challenge across glaciers and passes.</p>
-</div>
-
-</div>
-</div>
+    </div>
 
 </div>
 
-</body>
-</html>
+<!-- MODAL -->
+<div id="newsModal" class="modal">
+    <div class="modal-box">
+
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <img id="mImg">
+        <h2 id="mTitle"></h2>
+        <p id="mDesc"></p>
+        <small id="mLoc"></small>
+
+    </div>
+</div>
+
+<script>
+function openModal(title,img,desc,loc){
+    document.getElementById("newsModal").style.display="flex";
+
+    document.getElementById("mTitle").innerText = title;
+    document.getElementById("mImg").src = img;
+    document.getElementById("mDesc").innerText = desc;
+    document.getElementById("mLoc").innerText = loc;
+}
+
+function closeModal(){
+    document.getElementById("newsModal").style.display="none";
+}
+</script>
+
+{% endblock %}

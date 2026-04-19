@@ -4,7 +4,7 @@
 {% block title %}Explore Adventure | AAK{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'apps/treking.css' %}">
+<link rel="stylesheet" href="{% static 'apps/caravan.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -23,7 +23,7 @@
 
         <!-- IMAGE -->
         <div class="trek-image">
-            <img src="{{ item.image }}" alt="{{ item.name }}">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
         </div>
 
         <!-- DETAILS -->

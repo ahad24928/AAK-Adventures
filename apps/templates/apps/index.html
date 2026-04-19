@@ -36,24 +36,30 @@
   <div class="container-fluid">
 
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">AAK Camps</a>
+      <a class="navbar-brand" href="{% url 'index' %}">AAK Camps</a>
     </div>
 
     <!-- LEFT MENU -->
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="{% url 'index' %}">Home</a></li>
 
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           More <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#">News</a></li>
+          <li><a href="/news/">News</a></li>
           <li><a href="/">Caravan information</a></li>
         </ul>
       </li>
 
-      <li><a href="{% url 'news' %}">Reports</a></li>
+      <li><a href="/news/">Reports</a></li>
+      <li>
+  <a href="{% url 'my_bookings' %}">
+    <span class="glyphicon glyphicon-list"></span>
+    My Bookings
+  </a>
+</li>
     </ul>
 
     <!-- RIGHT MENU -->

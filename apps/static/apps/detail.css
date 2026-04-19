@@ -283,3 +283,12 @@
 .booking-btn:hover {
     background: #16a34a;
 }
+
+.modal {
+    display: none;
+}
+
+.modal.in {
+    display: block;
+    background: rgba(0,0,0,0.5);
+}

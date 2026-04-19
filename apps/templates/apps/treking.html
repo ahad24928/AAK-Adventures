@@ -23,7 +23,11 @@
 
         <!-- IMAGE -->
         <div class="trek-image">
-            <img src="{{ item.image }}" alt="{{ item.name }}">
+            {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            {% else %}
+                <img src="{% static 'apps/default.jpg' %}" alt="No Image">
+            {% endif %}
         </div>
 
         <!-- DETAILS -->
@@ -47,21 +51,25 @@
             </div>
 
             <!-- Button -->
+            {% if item.id %}
             <a href="{% url 'detail-page' 'treking' item.id %}" class="btn">
                 View Details
             </a>
+
+        {% endif %}
+
         </div>
 
         <!-- PRICE -->
         <div class="trek-price">
             <h3>Price</h3>
             <h2>₹{{ item.price }}</h2>
-
-            <h4> {{ item.city }}</h4>
-            
+            <h4>{{ item.city }}</h4>
         </div>
 
     </div>
+    {% empty %}
+        <p>No trekking data available.</p>
     {% endfor %}
 
 </div>

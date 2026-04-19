@@ -238,28 +238,101 @@
 </div>
 
 <!-- ================= JS ================= -->
-
 <script>
-function loginRequired(){
-    let msg = document.getElementById("loginMsg");
 
-    msg.innerHTML = `
-        <div style="
-            margin-top:10px;
-            padding:10px;
-            background:darkgrey;
-            color:black;
-            border-radius:8px;
-            font-size:13px;
-        ">
-            ⚠ Please login to your account first
-        </div>
-    `;
+// ================= BOOKING FORM (UNCHANGED) =================
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+    e.preventDefault();
 
-    setTimeout(()=>{
-        window.location.href = "{% url 'login' %}";
-    }, 1500);
+    let data = {
+        user_name: document.getElementById("name").value,
+        user_email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        booking_type: document.getElementById("type").value,
+        item_id: document.getElementById("item_id").value,
+        check_in: document.getElementById("check_in").value,
+        check_out: document.getElementById("check_out").value
+    };
+
+    fetch("/api/booking/", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Booking failed");
+        return response.json();
+    })
+    .then(() => {
+        document.getElementById("msg").innerHTML =
+            "<div style='color:green;'> Booking Successful!</div>";
+
+        setTimeout(()=>{ location.reload(); },1500);
+    })
+    .catch(() => {
+        document.getElementById("msg").innerHTML =
+            "<div style='color:red;'> Error booking. Try again.</div>";
+    });
+
+});
+
+// ================= CSRF =================
+function getCSRFToken() {
+    let cookieValue = null;
+    let name = "csrftoken";
+
+    if (document.cookie && document.cookie !== "") {
+        let cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
+
+// ================= LOGIN MESSAGE =================
+function loginRequired(){
+    document.getElementById("loginMsg").innerHTML =
+        "<span style='color:red;'>Please login to book</span>";
+}
+
+// ================= 🔥 MODAL FIX =================
+document.addEventListener("DOMContentLoaded", function(){
+
+    const modal = document.getElementById("bookingModal");
+    const btn = document.querySelector(".book-btn[data-target='#bookingModal']");
+    const closeBtn = document.querySelector("#bookingModal .close");
+
+    // OPEN MODAL
+    if(btn){
+        btn.addEventListener("click", function(){
+            modal.style.display = "block";
+        });
+    }
+
+    // CLOSE BUTTON
+    if(closeBtn){
+        closeBtn.addEventListener("click", function(){
+            modal.style.display = "none";
+        });
+    }
+
+    // CLICK OUTSIDE CLOSE
+    window.addEventListener("click", function(e){
+        if(e.target === modal){
+            modal.style.display = "none";
+        }
+    });
+
+});
 </script>
 
 {% endblock %}

@@ -1,0 +1,12 @@
+<h2>My Bookings</h2>
+
+{% for booking in bookings %}
+  <div class="card">
+    <p><strong>Type:</strong> {{ booking.booking_type }}</p>
+    <p><strong>Check In:</strong> {{ booking.check_in }}</p>
+    <p><strong>Check Out:</strong> {{ booking.check_out }}</p>
+    <p><strong>Booked On:</strong> {{ booking.created_at }}</p>
+  </div>
+{% empty %}
+  <p>No bookings found.</p>
+{% endfor %}

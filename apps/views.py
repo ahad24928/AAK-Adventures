@@ -1,6 +1,7 @@
 import requests
 #  DJANGO  IMPORTS
 from datetime import datetime
+from rest_framework import generics
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -12,8 +13,8 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.authentication import (SessionAuthentication, BasicAuthentication)
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
 #  LOCAL APP IMPORTS
-from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment)
-from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer)
+from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment, News)
+from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer, NewsSerializer)
 
 
 
@@ -27,35 +28,24 @@ def index(request):
 def caravan(request):
     return render(request, "apps/caravan.html")
 
-def news(request):
-    return render(request, "apps/news.html")
+def news_page(request):
+    news = News.objects.all().order_by('-created_at')
+    return render(request, "apps/news.html", {"news": news})
 
-def adventure_page(request):
-    return render(request, "apps/adventure.html")
-
+# ================= TREKKING =================
 
 def treking_page(request):
-    api_url = "http://127.0.0.1:8000/api/treking/"
-    
-    response = requests.get(api_url)
-    data = response.json()
-
+    data = Treking.objects.all()
     return render(request, "apps/treking.html", {"data": data})
 
+# ================= CAMPING =================
 def camping_page(request):
-    api_url = "http://127.0.0.1:8000/api/camping/"
-    
-    response = requests.get(api_url)
-    data_camp = response.json()
-
+    data_camp = Camping.objects.all()  
     return render(request, "apps/camping.html", {"data_camp": data_camp})
 
+# ================= CARAVAN =================
 def caravan_page(request):
-    api_url = "http://127.0.0.1:8000/api/caravan/"
-    
-    response = requests.get(api_url)
-    data_caravan = response.json()
-
+    data_caravan = Caravan.objects.all()  
     return render(request, "apps/caravan.html", {"data_caravan": data_caravan})
 
 
@@ -101,15 +91,13 @@ def add_comment(request, type, pk):
 
     return redirect('detail-page', type=type, pk=pk)
 
+
 @login_required(login_url='login')
 def my_bookings(request):
     bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
 
-    total_bookings = bookings.count()
-
     return render(request, "apps/my_bookings.html", {
-        "bookings": bookings,
-        "total_bookings": total_bookings
+        "bookings": bookings
     })
 
 # -------- API VIEWS --------
@@ -145,12 +133,26 @@ class caravanDetail(RetrieveUpdateDestroyAPIView):
     queryset = Caravan.objects.all()
     serializer_class = CaravanSerializer
 
+# LIST + CREATE
+class NewsListCreateAPIView(generics.ListCreateAPIView):
+    queryset = News.objects.all().order_by('-created_at')
+    serializer_class = NewsSerializer
+
+# RETRIEVE + UPDATE + DELETE
+class NewsDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+
 class bookingCreate(CreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication]
 
-    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 
 
