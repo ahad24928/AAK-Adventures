@@ -13,10 +13,8 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.authentication import (SessionAuthentication, BasicAuthentication)
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
 #  LOCAL APP IMPORTS
-from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment, News)
+from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment, Contact, News)
 from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer, NewsSerializer)
-
-
 
 # -------- NORMAL VIEWS --------
 def index(request):
@@ -25,15 +23,12 @@ def index(request):
 
     return render(request, "apps/index.html", {"cities": cities, "rent":rent})
 
-def caravan(request):
-    return render(request, "apps/caravan.html")
 
 def news_page(request):
     news = News.objects.all().order_by('-created_at')
     return render(request, "apps/news.html", {"news": news})
 
 # ================= TREKKING =================
-
 def treking_page(request):
     data = Treking.objects.all()
     return render(request, "apps/treking.html", {"data": data})
@@ -48,7 +43,7 @@ def caravan_page(request):
     data_caravan = Caravan.objects.all()  
     return render(request, "apps/caravan.html", {"data_caravan": data_caravan})
 
-
+# ================= DETAIL PAGE =================
 def detail_page(request, type, pk):
     if type == "camping":
         obj = Camping.objects.get(id=pk)
@@ -68,7 +63,7 @@ def detail_page(request, type, pk):
         "type": type,
         "comments": comments
     })
-
+# ================= ADD COMMENT =================
 @login_required(login_url='login')
 def add_comment(request, type, pk):
     if request.method == "POST":
@@ -86,12 +81,11 @@ def add_comment(request, type, pk):
             content=content,
             parent=parent
         )
-
         messages.success(request, "Comment added successfully")
 
     return redirect('detail-page', type=type, pk=pk)
 
-
+# ================= MY BOOKING PAGE =================
 @login_required(login_url='login')
 def my_bookings(request):
     bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
@@ -99,6 +93,31 @@ def my_bookings(request):
     return render(request, "apps/my_bookings.html", {
         "bookings": bookings
     })
+
+@login_required(login_url='login')
+def cancel_booking(request, pk):
+    booking = get_object_or_404(Booking, id=pk, user=request.user)
+    booking.delete()
+    messages.success(request, "Booking cancelled successfully")
+    return redirect('my_bookings')
+    
+# ================= contact us =================
+def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        Contact.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+        messages.success(request, "Your message has been sent successfully! we will contact u soon")
+        return redirect('contact')  
+    return render(request, 'apps/contact.html') 
 
 # -------- API VIEWS --------
 
@@ -112,18 +131,17 @@ class trekingDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = TrekingSerializer
 
    
-# camping api
+# CAMPING API
 
 class campingList(ListCreateAPIView):
     queryset = Camping.objects.all()
     serializer_class = CampingSerializer
 
-
 class campingDetail(RetrieveUpdateDestroyAPIView):
     queryset = Camping.objects.all()
     serializer_class = CampingSerializer
 
-# caravan api
+# CARAVN API
 
 class caravanList(ListCreateAPIView):
     queryset = Caravan.objects.all()
@@ -133,17 +151,17 @@ class caravanDetail(RetrieveUpdateDestroyAPIView):
     queryset = Caravan.objects.all()
     serializer_class = CaravanSerializer
 
-# LIST + CREATE
+# News API
 class NewsListCreateAPIView(generics.ListCreateAPIView):
     queryset = News.objects.all().order_by('-created_at')
     serializer_class = NewsSerializer
 
-# RETRIEVE + UPDATE + DELETE
+
 class NewsDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
 
-
+# BOOKING API
 class bookingCreate(CreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
@@ -152,6 +170,7 @@ class bookingCreate(CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 
 

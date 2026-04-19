@@ -8,21 +8,17 @@
 
 <title>Adventure With Me</title>
 
-<!-- Bootstrap 3 CSS -->
+<!-- Bootstrap 3 CSS (KEEP - required for your navbar/grid) -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!-- Google Material Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<!-- Font Awesome (ONLY ONE VERSION - KEEP THIS) -->
+<!-- Font Awesome 6 (KEEP - for all icons) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<!-- jQuery -->
+<!-- jQuery (KEEP - required for Bootstrap 3 JS) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <!-- Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <!-- Custom CSS -->
 <link rel="stylesheet" href="{% static 'apps/index.css' %}">
 
@@ -48,12 +44,12 @@
           More <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="/news/">News</a></li>
+          <li><a href="{% url 'news_page' %}">News</a></li>
           <li><a href="/">Caravan information</a></li>
         </ul>
       </li>
 
-      <li><a href="/news/">Reports</a></li>
+      <li><a href="{% url 'contact' %}">Contact us</a></li>
       <li>
   <a href="{% url 'my_bookings' %}">
     <span class="glyphicon glyphicon-list"></span>
@@ -137,7 +133,7 @@
         </div>
         <div class="box">
             <i class="fas fa-fire"></i>
-            <h3><a href="/news/">news and events</a></h3>
+            <h3><a href="{% url 'news_page' %}">news and events</a></h3>
         </div>
     </div>
 </section>
@@ -440,7 +436,7 @@
             Often celebrated as a harmonious union of physical activity and natural exploration
             become an enriching journey for both body and mind.
           </p>
-          <a href="#" class="hero-action-btn">Book Now</a>
+          <a href="{% url 'camping' }" class="hero-action-btn">Book Now</a>
         </div>
       </div>
 
@@ -450,68 +446,76 @@
 </div>
                     <!-- <footer></footer> -->
 
-
 <!-- FOOTER -->
-<div class="container-fluid footer-section">
-  <div class="row no-gutter">
+<!-- FOOTER -->
+<footer class="adv-footer">
 
-    <!-- LINKS -->
-    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
-      <div class="footer-content text-center">
-        <div class="headings"><b>Link</b></div>
-        <h5 class="gog">Home</h5>
-        <h5 class="gog">About</h5>
-        <h5 class="gog">Connect</h5>
-        <h5 class="gog">Login</h5>
-        <h5 class="gog">Corporate Tour</h5>
+  <div class="container">
+    <div class="row footer-row">
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <h3>Link</h3>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Connect</a>
+        <a href="#">Login</a>
+        <a href="#">Corporate Tour</a>
       </div>
-    </div>
 
-    <!-- MAIN SECTION -->
-    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
-      <div class="footer-content text-center">
-        <div class="headings"><b>Main Section</b></div>
-        <h5 class="gog">Package Tours</h5>
-        <h5 class="gog">Blog</h5>
-        <h5 class="gog">Company Profile</h5>
-        <h5 class="gog">Contact Us</h5>
-        <h5 class="gog">States of India</h5>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <h3>Main Section</h3>
+        <a href="#">Package Tours</a>
+        <a href="#">Blog</a>
+        <a href="#">Company Profile</a>
+        <a href="#">Contact Us</a>
+        <a href="#">States of India</a>
       </div>
-    </div>
 
-    <!-- LEGAL POLICY -->
-    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
-      <div class="footer-content text-center">
-        <div class="headings"><b>Legal Policy</b></div>
-        <h5 class="gog">Package Tours</h5>
-        <h5 class="gog">Terms & Conditions</h5>
-        <h5 class="gog">Disclaimer</h5>
-        <h5 class="gog">We Are Hiring</h5>
-        <h5 class="gog">Share Your Travel Experience</h5>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <h3>Legal Policy</h3>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Disclaimer</a>
+        <a href="#">We Are Hiring</a>
+        <a href="#">Share Experience</a>
       </div>
-    </div>
 
-    <!-- SOCIAL MEDIA -->
-    <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
-      <div class="footer-content text-center">
-        <div class="headings"><b>Social Media</b></div>
-        <div class="social-icons">
-         <a href="https://www.facebook.com/YourPage" target="_blank" class="fa fa-facebook"></a>
-          <a href="https://twitter.com/YourProfile" target="_blank" class="fa fa-twitter"></a>
-          <a href="https://plus.google.com/YourProfile" target="_blank" class="fa fa-google"></a>
-          <a href="https://www.linkedin.com/in/YourProfile" target="_blank" class="fa fa-linkedin"></a>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <h3>Social Media</h3>
+
+        <div class="social">
+
+          <a href="https://facebook.com" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="https://twitter.com" target="_blank">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+
+          <a href="https://google.com" target="_blank">
+            <i class="fa-brands fa-google"></i>
+          </a>
+
+          <a href="https://linkedin.com" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+
         </div>
+
+        <p class="footer-text">
+          Explore trekking, camping & caravan adventures with us.
+        </p>
+
       </div>
+
     </div>
 
-    <!-- COPYRIGHT -->
-    <div class="col-lg-12 col-md-12 col-sm-12 text-center footer-bottom">
-      <hr class="hr">
-      <h4 class="mim">© Copyright 2024 - @Etech Institute. All rights reserved.</h4>
+    <div class="footer-bottom">
+      © 2026 AAK Camps | All Rights Reserved
     </div>
-
   </div>
-</div> 
+
+</footer>
 <script src="script.js"></script>
 
 <script>

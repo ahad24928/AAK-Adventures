@@ -1,0 +1,272 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact | AAK Camps</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* BACKGROUND */
+body{
+  margin:0;
+  font-family: "Segoe UI", sans-serif;
+  background:  linear-gradient(135deg, #1f4037, #0f172a); 
+  color:white;
+}
+
+/* HERO */
+.hero{
+  padding:60px 20px 40px;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:42px;
+  font-weight:700;
+}
+
+.hero p{
+  max-width:600px;
+  margin:auto;
+  opacity:0.8;
+}
+
+/* MAIN WRAPPER */
+.contact-wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+}
+
+/* CONTACT BOX */
+.contact-box{
+  width:100%;
+  max-width:900px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* LEFT INFO */
+.contact-info{
+  padding:30px;
+  background:rgba(0,0,0,0.3);
+}
+
+.contact-info h2{
+  font-size:24px;
+  margin-bottom:20px;
+}
+
+.contact-info div{
+  margin-bottom:15px;
+  font-size:14px;
+  opacity:0.9;
+}
+
+.contact-info i{
+  color:#00bfff;
+  margin-right:10px;
+}
+
+/* FORM */
+.contact-form{
+  padding:30px;
+}
+
+.contact-form h2{
+  margin-bottom:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border:none;
+  border-radius:10px;
+  outline:none;
+}
+
+.contact-form button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+   background: #22c55e;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/*  NEW BOTTOM TOAST STYLE */
+
+.msg-bottom-wrapper{
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.msg-bottom{
+    min-width: 280px;
+    max-width: 420px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    animation: slideUp 0.4s ease;
+}
+
+/* SUCCESS */
+.msg-bottom.success{
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+}
+
+/* ERROR */
+.msg-bottom.error{
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+}
+
+/* INFO */
+.msg-bottom.info{
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+/* WARNING */
+.msg-bottom.warning{
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    color:#000;
+}
+
+/* ANIMATION */
+@keyframes slideUp{
+    from{
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .contact-box{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Contact AAK Camps</h1>
+  <p>Plan your next adventure with us — trekking, camping, caravan & more.</p>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-wrapper">
+
+  <div class="contact-box">
+
+    <!-- LEFT -->
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+
+      <div><i class="fas fa-map-marker-alt"></i> India Adventure HQ</div>
+      <div><i class="fas fa-phone"></i> +91 99999 88888</div>
+      <div><i class="fas fa-envelope"></i> support@aakcamps.com</div>
+      <div><i class="fas fa-clock"></i> 24/7 Support</div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="contact-form">
+
+      <h2>Send Message</h2>
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" rows="4" placeholder="Message"></textarea>
+
+        <button type="submit">
+          Send Message <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- message -->
+
+{% if messages %}
+<div class="msg-bottom-wrapper">
+    {% for message in messages %}
+        <div class="msg-bottom {{ message.tags }}">
+            
+            {% if message.tags == "success" %}
+                <i class="fas fa-check-circle"></i>
+            {% elif message.tags == "error" %}
+                <i class="fas fa-times-circle"></i>
+            {% elif message.tags == "warning" %}
+                <i class="fas fa-exclamation-triangle"></i>
+            {% else %}
+                <i class="fas fa-info-circle"></i>
+            {% endif %}
+
+            <span>{{ message }}</span>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- AUTO HIDE -->
+<script>
+setTimeout(() => {
+    const messages = document.querySelectorAll(".msg-bottom");
+
+    messages.forEach((msg, i) => {
+        setTimeout(() => {
+            msg.style.opacity = "0";
+            msg.style.transform = "translateY(20px)";
+            msg.style.transition = "0.4s";
+            setTimeout(() => msg.remove(), 400);
+        }, i * 200);
+    });
+
+}, 3000);
+</script>
+
+</body>
+</html>

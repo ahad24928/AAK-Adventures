@@ -269,13 +269,13 @@ document.getElementById("bookingForm").addEventListener("submit", function(e){
     })
     .then(() => {
         document.getElementById("msg").innerHTML =
-            "<div style='color:green;'> Booking Successful!</div>";
+            "<div style='color:black;'> Booking Successful!</div>";
 
         setTimeout(()=>{ location.reload(); },1500);
     })
     .catch(() => {
         document.getElementById("msg").innerHTML =
-            "<div style='color:red;'> Error booking. Try again.</div>";
+            "<div style='color:black;'> Error booking. Try again.</div>";
     });
 
 });
@@ -301,10 +301,10 @@ function getCSRFToken() {
 // ================= LOGIN MESSAGE =================
 function loginRequired(){
     document.getElementById("loginMsg").innerHTML =
-        "<span style='color:red;'>Please login to book</span>";
+        "<span style='color:white;'>Please login to book</span>";
 }
 
-// ================= 🔥 MODAL FIX =================
+// =================  MODAL FIX =================
 document.addEventListener("DOMContentLoaded", function(){
 
     const modal = document.getElementById("bookingModal");

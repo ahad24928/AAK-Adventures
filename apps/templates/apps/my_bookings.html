@@ -1,12 +1,207 @@
-<h2>My Bookings</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% for booking in bookings %}
-  <div class="card">
-    <p><strong>Type:</strong> {{ booking.booking_type }}</p>
-    <p><strong>Check In:</strong> {{ booking.check_in }}</p>
-    <p><strong>Check Out:</strong> {{ booking.check_out }}</p>
-    <p><strong>Booked On:</strong> {{ booking.created_at }}</p>
-  </div>
-{% empty %}
-  <p>No bookings found.</p>
-{% endfor %}
+<title>My Bookings | AAK Camps</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* BACKGROUND */
+body{
+    margin:0;
+    font-family:"Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #1f4037, #0f172a); 
+    color:white;
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    padding:50px 20px 10px;
+}
+
+.header h1{
+    font-size:36px;
+    font-weight:700;
+}
+
+.header p{
+    opacity:0.8;
+}
+
+/* BACK BUTTON */
+.back-btn{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background: #22c55e;
+    padding:8px 14px;
+    border-radius:10px;
+    color:white;
+    text-decoration:none;
+    font-size:13px;
+}
+
+/* GRID (3 CARDS PER ROW) */
+.booking-container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:18px;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+    .booking-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:600px){
+    .booking-container{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CARD */
+.booking-card{
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(12px);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,0.35);
+    transition:0.3s;
+}
+
+.booking-card:hover{
+    transform: translateY(-6px);
+}
+
+/* IMAGE */
+.booking-card img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+    display:block;
+}
+
+/* CONTENT */
+.booking-content{
+    padding:12px 14px;
+}
+
+.booking-content h3{
+    font-size:16px;
+    margin-bottom:6px;
+}
+
+.booking-content p{
+    font-size:12px;
+    opacity:0.85;
+    margin:4px 0;
+}
+
+/* BADGE */
+.badge-status{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:6px;
+    font-size:11px;
+    margin-top:8px;
+    background:#16a34a;
+}
+
+/* CANCEL BUTTON */
+.btn-cancel{
+    display:block;
+    margin-top:10px;
+    width:100%;
+    text-align:center;
+    padding:7px;
+    border-radius:8px;
+    background:#dc3545;
+    color:white;
+    text-decoration:none;
+    font-size:12px;
+}
+
+.btn-cancel:hover{
+    background:#b02a37;
+    color:white;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    padding:80px 20px;
+    opacity:0.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<a href="{% url 'index' %}" class="back-btn">
+    <i class="fas fa-arrow-left"></i> Home
+</a>
+
+<div class="header">
+    <h1>My Bookings</h1>
+    <p>Track all your trekking, camping & caravan bookings</p>
+</div>
+
+{% if bookings %}
+
+<div class="booking-container">
+
+    {% for b in bookings %}
+
+    <div class="booking-card">
+
+        <!-- IMAGE (safe fallback) -->
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800">
+
+        <div class="booking-content">
+
+            <h3>{{ b.booking_type|title }} Booking #{{ b.item_id }}</h3>
+
+            <p><i class="fas fa-layer-group"></i> {{ b.booking_type|title }}</p>
+            <p><i class="fas fa-user"></i> {{ b.user_name }}</p>
+            <p><i class="fas fa-envelope"></i> {{ b.user_email }}</p>
+            <p><i class="fas fa-phone"></i> {{ b.phone }}</p>
+            <p><i class="fas fa-calendar"></i> {{ b.created_at|date:"d M Y" }}</p>
+
+            <span class="badge-status">Confirmed</span>
+
+            <a href="/cancel-booking/{{ b.id }}/" class="btn-cancel">
+                <i class="fas fa-times"></i> Cancel Booking
+            </a>
+
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="empty">
+    <h2>No Bookings Yet</h2>
+    <p>Start exploring trekking, camping & caravan adventures</p>
+</div>
+
+{% endif %}
+
+</body>
+</html>

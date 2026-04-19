@@ -53,6 +53,15 @@ class Caravan(models.Model):
     def __str__(self):
         return self.name
 
+class News(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to="news/")
+    location = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
 
 class Booking(models.Model):
 
@@ -90,13 +99,13 @@ class HotelComment(models.Model):
     def __str__(self):
         return f"{self.user} - {self.item_type}"
 
-
-class News(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to="news/")
-    location = models.CharField(max_length=100, blank=True, null=True)
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.name
+

@@ -63,12 +63,12 @@
           More <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="/news/">News</a></li>
+          <li><a href="{% url 'news_page' %}">News</a></li>
           <li><a href="/">Caravan information</a></li>
         </ul>
       </li>
 
-      <li><a href="/news/">Reports</a></li>
+      <li><a href="{% url 'news_page' %}">Reports</a></li>
       <li>
   <a href="{% url 'my_bookings' %}">
     <span class="glyphicon glyphicon-list"></span>
