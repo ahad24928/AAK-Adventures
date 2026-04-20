@@ -1,6 +1,7 @@
 import requests
 #  DJANGO  IMPORTS
 from datetime import datetime
+from django.db.models import Q
 from rest_framework import generics
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -18,11 +19,10 @@ from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerialize
 
 # -------- NORMAL VIEWS --------
 def index(request):
-    cities = Country.objects.all()
+    cities = Treking.objects.all()
     rent = Caravan.objects.all()
 
     return render(request, "apps/index.html", {"cities": cities, "rent":rent})
-
 
 def news_page(request):
     news = News.objects.all().order_by('-created_at')
@@ -119,20 +119,73 @@ def contact(request):
         return redirect('contact')  
     return render(request, 'apps/contact.html') 
 
+# search cities or else navbar
+from django.db.models import Q
+
+def search(request):
+    query = request.GET.get('q', '').strip().lower()
+
+    treking_results = []
+    camping_results = []
+    caravan_results = []
+    news_results = []
+
+    if query:
+        #  DIRECT TYPE SEARCH (FAST + SIMPLE)
+        if "trek" in query:
+            treking_results = Treking.objects.all()
+
+        elif "camp" in query:
+            camping_results = Camping.objects.all()
+
+        elif "caravan" in query:
+            caravan_results = Caravan.objects.all()
+        else:
+            #  GENERAL SEARCH (fallback)
+            treking_results = Treking.objects.filter(
+                Q(name__icontains=query) |
+                Q(city__icontains=query) |
+                Q(description__icontains=query) |
+                Q(country__name__icontains=query)
+            )
+            camping_results = Camping.objects.filter(
+                Q(namecamp__icontains=query) |
+                Q(city__icontains=query) |
+                Q(about__icontains=query) |
+                Q(country__name__icontains=query)
+            )
+
+            caravan_results = Caravan.objects.filter(
+                Q(name__icontains=query) |
+                Q(city__icontains=query) |
+                Q(description__icontains=query) |
+                Q(country__name__icontains=query)
+            )
+
+            news_results = News.objects.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query) |
+                Q(location__icontains=query)
+            )
+
+    return render(request, "apps/search_results.html", {
+        "query": query,
+        "treking_results": treking_results,
+        "camping_results": camping_results,
+        "caravan_results": caravan_results,
+        "news_results": news_results,
+    })
 # -------- API VIEWS --------
 
 class trekingList(ListCreateAPIView):
     queryset = Treking.objects.all()
     serializer_class = TrekingSerializer
 
-
 class trekingDetail(RetrieveUpdateDestroyAPIView):
     queryset = Treking.objects.all()
     serializer_class = TrekingSerializer
-
    
 # CAMPING API
-
 class campingList(ListCreateAPIView):
     queryset = Camping.objects.all()
     serializer_class = CampingSerializer
@@ -142,7 +195,6 @@ class campingDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = CampingSerializer
 
 # CARAVN API
-
 class caravanList(ListCreateAPIView):
     queryset = Caravan.objects.all()
     serializer_class = CaravanSerializer
@@ -155,7 +207,6 @@ class caravanDetail(RetrieveUpdateDestroyAPIView):
 class NewsListCreateAPIView(generics.ListCreateAPIView):
     queryset = News.objects.all().order_by('-created_at')
     serializer_class = NewsSerializer
-
 
 class NewsDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = News.objects.all()

@@ -1,0 +1,166 @@
+{% extends 'apps/base.html' %}
+{% load static %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apps/search.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<div class="container search-page">
+
+    <h2 class="search-title">Results for "{{ query }}"</h2>
+
+    <!-- ================= TREKKING ================= -->
+    <h3 class="section-title">Treking</h3>
+
+    <div class="row">
+
+        {% for item in treking_results %}
+        <div class="col-md-4 col-sm-6">
+
+            <div class="travel-card">
+
+                <div class="travel-img">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/400x250">
+                    {% endif %}
+
+                    <span class="badge-price">₹{{ item.price }}</span>
+                </div>
+
+                <div class="travel-body">
+                    <h4>{{ item.name }}</h4>
+                    <p class="location">{{ item.city }}</p>
+
+                    <a href="{% url 'detail-page' 'treking' item.id %}" class="view-btn">
+                        View Details
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        {% empty %}
+            <p>No trekking found</p>
+        {% endfor %}
+
+    </div>
+
+    <hr>
+
+    <!-- ================= CAMPING ================= -->
+    <h3 class="section-title">Camping</h3>
+
+    <div class="row">
+
+        {% for item in camping_results %}
+        <div class="col-md-4 col-sm-6">
+
+            <div class="travel-card">
+
+                <div class="travel-img">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/400x250">
+                    {% endif %}
+                </div>
+
+                <div class="travel-body">
+                    <h4>{{ item.namecamp }}</h4>
+                    <p class="location">{{ item.city }}</p>
+
+                    <a href="{% url 'detail-page' 'camping' item.id %}" class="view-btn">
+                        View Details
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        {% empty %}
+            <p>No camping found</p>
+        {% endfor %}
+
+    </div>
+
+    <hr>
+
+    <!-- ================= CARAVAN ================= -->
+    <h3 class="section-title">Caravan</h3>
+
+    <div class="row">
+
+        {% for item in caravan_results %}
+        <div class="col-md-4 col-sm-6">
+
+            <div class="travel-card">
+
+                <div class="travel-img">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/400x250">
+                    {% endif %}
+                </div>
+
+                <div class="travel-body">
+                    <h4>{{ item.name }}</h4>
+                    <p class="location">{{ item.city }}</p>
+
+                    <a href="{% url 'detail-page' 'caravan' item.id %}" class="view-btn">
+                        View Details
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        {% empty %}
+            <p>No caravan found</p>
+        {% endfor %}
+
+    </div>
+
+    <hr>
+
+    <!-- ================= NEWS ================= -->
+    <h3 class="section-title">News</h3>
+
+    <div class="row">
+
+        {% for item in news_results %}
+        <div class="col-md-4 col-sm-6">
+
+            <div class="travel-card">
+
+                <div class="travel-img">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/400x250">
+                    {% endif %}
+                </div>
+
+                <div class="travel-body">
+                    <h4>{{ item.title }}</h4>
+                    <p class="location">{{ item.location }}</p>
+                </div>
+
+            </div>
+
+        </div>
+        {% empty %}
+            <p>No news found</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

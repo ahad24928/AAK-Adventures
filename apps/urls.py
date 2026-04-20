@@ -8,6 +8,8 @@ urlpatterns = [
     path('camping_page/', views.camping_page, name='camping_page'),
     path('caravan_page/', views.caravan_page, name='caravan_page'),
     path('news/', views.news_page, name='news_page'),
+    path('search/', views.search, name='search'),
+   
 
     path('detail/<str:type>/<int:pk>/', views.detail_page, name='detail-page'),
     path('detail/<str:type>/<int:pk>/comment/', views.add_comment, name='add_comment'), 

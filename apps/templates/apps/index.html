@@ -27,7 +27,6 @@
 <body>
 
                      <!-- navbar -->
-                
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
 
@@ -50,21 +49,36 @@
       </li>
 
       <li><a href="{% url 'contact' %}">Contact us</a></li>
+
       <li>
-  <a href="{% url 'my_bookings' %}">
-    <span class="glyphicon glyphicon-list"></span>
-    My Bookings
-  </a>
-</li>
+        <a href="{% url 'my_bookings' %}">
+          <span class="glyphicon glyphicon-list"></span>
+          My Bookings
+        </a>
+      </li>
     </ul>
+
+    <!-- SEARCH (RIGHT SIDE) -->
+    <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right search-form">
+
+        <div class="form-group search-group">
+            <input type="text"
+                   name="q"
+                   class="form-control search-input"
+                   placeholder="Search treking, camping, caravan...">
+        </div>
+
+        <button type="submit" class="btn srchbtn">
+            Search
+        </button>
+
+    </form>
 
     <!-- RIGHT MENU -->
     <ul class="nav navbar-nav navbar-right">
 
       {% if user.is_authenticated %}
 
-
-        <!-- USER -->
         <li>
           <a href="#">
             <span class="glyphicon glyphicon-user"></span>
@@ -72,7 +86,6 @@
           </a>
         </li>
 
-        <!-- LOGOUT -->
         <li>
           <a href="{% url 'logout' %}">
             <span class="glyphicon glyphicon-log-out"></span>

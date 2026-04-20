@@ -24,20 +24,31 @@
 
 
 <style>
-    /* NAVBAR OVER IMAGE */
+  /* NAVBAR OVER IMAGE */
 .navbar{
     margin-bottom: 0;
     border-radius: 0;
 }
 
-
 .navbar-inverse {
-    background: linear-gradient(135deg, #1f4037, #0f172a); 
-    border-color:  #0f172a;
+    background: linear-gradient(135deg, #1f4037, #0f172a);
+    border-color: #0f172a;
 }
 
 .navbar-inverse .navbar-brand {
     color: #ffffff;
+}
+
+/* SEARCH BUTTON */
+.srchbtn{
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+.srchbtn:hover{
+    background-color: #16a34a;
 }
 </style>
 
@@ -45,9 +56,8 @@
 
 </head>
 <body>
-                   <!-- navbar -->
-                
-   <nav class="navbar navbar-inverse">
+                    <!-- navbar -->
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
 
     <div class="navbar-header">
@@ -68,22 +78,37 @@
         </ul>
       </li>
 
-      <li><a href="{% url 'news_page' %}">Reports</a></li>
+      <li><a href="{% url 'contact' %}">Contact us</a></li>
+
       <li>
-  <a href="{% url 'my_bookings' %}">
-    <span class="glyphicon glyphicon-list"></span>
-    My Bookings
-  </a>
-</li>
+        <a href="{% url 'my_bookings' %}">
+          <span class="glyphicon glyphicon-list"></span>
+          My Bookings
+        </a>
+      </li>
     </ul>
+
+    <!-- SEARCH (RIGHT SIDE) -->
+    <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right search-form">
+
+        <div class="form-group search-group">
+            <input type="text"
+                   name="q"
+                   class="form-control search-input"
+                   placeholder="Search treking, camping, caravan...">
+        </div>
+
+        <button type="submit" class="btn srchbtn">
+            Search
+        </button>
+
+    </form>
 
     <!-- RIGHT MENU -->
     <ul class="nav navbar-nav navbar-right">
 
       {% if user.is_authenticated %}
 
-
-        <!-- USER -->
         <li>
           <a href="#">
             <span class="glyphicon glyphicon-user"></span>
@@ -91,7 +116,6 @@
           </a>
         </li>
 
-        <!-- LOGOUT -->
         <li>
           <a href="{% url 'logout' %}">
             <span class="glyphicon glyphicon-log-out"></span>
@@ -121,6 +145,7 @@
 
   </div>
 </nav>
+
 {% block main %} {% endblock %}
 
 {% block js %} {% endblock %}
