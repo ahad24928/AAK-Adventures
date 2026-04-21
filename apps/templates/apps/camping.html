@@ -1,7 +1,7 @@
 {% extends 'apps/base.html' %}
 {% load static %}
 
-{% block title %}Explore Adventure | AAK{% endblock %}
+{% block title %}Camping | AAK Adventures{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'apps/camping.css' %}">
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Button -->
-            <a href="{% url 'detail-page' 'camping' item.id %}" class="btn">
+            <a href="{% url 'detail-page' 'camping' item.id %}" class="trek-btn">
                 View Details
             </a>
         </div>

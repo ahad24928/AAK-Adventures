@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Adventure With Me</title>
+<title>Adventure With Me | AAK</title>
 
 <!-- Bootstrap 3 CSS (KEEP - required for your navbar/grid) -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,6 +19,9 @@
 
 <!-- Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <!-- Custom CSS -->
 <link rel="stylesheet" href="{% static 'apps/index.css' %}">
 
@@ -31,7 +34,7 @@
   <div class="container-fluid">
 
     <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'index' %}">AAK Camps</a>
+      <a class="navbar-brand" href="{% url 'index' %}">AAK Adventures</a>
     </div>
 
     <!-- LEFT MENU -->
@@ -115,6 +118,7 @@
 
   </div>
 </nav>
+
                                     <!-- image -->
 <section class="hero">
     <div class="hero-content">
@@ -555,7 +559,6 @@ function moveSlider(direction) {
     behavior: "smooth"
   });
 }
-
 </script>
 
 </body>

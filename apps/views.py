@@ -2,12 +2,12 @@ import requests
 #  DJANGO  IMPORTS
 from datetime import datetime
 from django.db.models import Q
-from rest_framework import generics
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 #  DJANGO REST FRAMEWORK IMPORTS
 from rest_framework.decorators import api_view
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView)
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -175,6 +175,7 @@ def search(request):
         "caravan_results": caravan_results,
         "news_results": news_results,
     })
+
 # -------- API VIEWS --------
 
 class trekingList(ListCreateAPIView):

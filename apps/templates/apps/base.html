@@ -24,7 +24,7 @@
 
 
 <style>
-  /* NAVBAR OVER IMAGE */
+/* NAVBAR OVER IMAGE */
 .navbar{
     margin-bottom: 0;
     border-radius: 0;
@@ -50,18 +50,45 @@
 .srchbtn:hover{
     background-color: #16a34a;
 }
+
+/* FORM LAYOUT */
+.search-form{
+    margin-top: 8px;
+}
+
+/* 🔥 RESPONSIVE FIX */
+@media (max-width: 768px) {
+
+    .search-form{
+        width: 100%;
+        padding: 10px;
+        float: none !important;
+    }
+
+    .search-group,
+    .search-input{
+        width: 100% !important;
+        display: block;
+    }
+
+    .srchbtn{
+        width: 100%;
+        margin-top: 5px;
+        border-radius: 20px;
+    }
+}
 </style>
 
 {% block extra_css %}{% endblock %}
 
 </head>
 <body>
-                    <!-- navbar -->
+                      <!-- navbar -->
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
 
     <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'index' %}">AAK Camps</a>
+      <a class="navbar-brand" href="{% url 'index' %}">AAK Adventures</a>
     </div>
 
     <!-- LEFT MENU -->

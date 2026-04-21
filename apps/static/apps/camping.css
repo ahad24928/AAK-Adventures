@@ -3,7 +3,7 @@ body{
     margin: 0;
     font-family: "Segoe UI", sans-serif;
     background: #fff;
-    color: #fff;
+    color: #111827;
 }
 
 /* PAGE CONTAINER */
@@ -93,7 +93,7 @@ body{
 }
 
 /* BUTTON */
-.btn{
+.trek-btn{
     display: inline-block;
     margin-top: 10px;
     padding: 10px 14px;
