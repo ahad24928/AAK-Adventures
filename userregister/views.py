@@ -1,13 +1,11 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User, auth
-from django.shortcuts import redirect
-from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib import messages, auth
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.contrib.auth.models import User
 from rest_framework import status
 
 # Create your views here.
@@ -65,23 +63,45 @@ def register(request):
     return render(request, 'userregister/register.html')
 
 
-@api_view(['POST'])
+@api_view(['POST','GET'])    
 def register_api(request):
     data = request.data
 
-    if data['password'] != data.get('confirm_password'):
-        return Response({"error": "Passwords do not match"}, status=400)
+    username = data.get('username')
+    password = data.get('password')
+    confirm_password = data.get('confirm_password')
+    email = data.get('email')
 
-    if User.objects.filter(username=data['username']).exists():
-        return Response({"error": "Username already exists"}, status=400)
+    #  validation
+    if not username or not password:
+        return Response(
+            {"error": "Username and password required"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
+    if password != confirm_password:
+        return Response(
+            {"error": "Passwords do not match"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if User.objects.filter(username=username).exists():
+        return Response(
+            {"error": "Username already exists"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    #  create user
     user = User.objects.create_user(
-        username=data['username'],
-        password=data['password'],
-        email=data.get('email')
+        username=username,
+        password=password,
+        email=email
     )
 
-    return Response({"message": "User created successfully"}, status=201)
+    return Response(
+        {"message": "User created successfully"},
+        status=status.HTTP_201_CREATED
+    )
 
 
 

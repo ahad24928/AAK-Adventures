@@ -254,7 +254,7 @@ document.getElementById("bookingForm").addEventListener("submit", function(e){
         check_out: document.getElementById("check_out").value
     };
 
-    fetch("/api/booking/", {
+    fetch("/api/bookings/", {
         method: "POST",
         credentials: "same-origin",
         headers: {

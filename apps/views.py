@@ -7,12 +7,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 #  DJANGO REST FRAMEWORK IMPORTS
 from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView)
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.authentication import (SessionAuthentication, BasicAuthentication)
 from rest_framework.permissions import (AllowAny, IsAuthenticated)
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.viewsets import ModelViewSet
 #  LOCAL APP IMPORTS
 from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment, Contact, News)
 from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer, NewsSerializer)
@@ -119,8 +122,7 @@ def contact(request):
         return redirect('contact')  
     return render(request, 'apps/contact.html') 
 
-# search cities or else navbar
-from django.db.models import Q
+# search Bar logic
 
 def search(request):
     query = request.GET.get('q', '').strip().lower()
@@ -213,17 +215,18 @@ class NewsDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
 
-# BOOKING API
-class bookingCreate(CreateAPIView):
+# BOOKING API with (ModelViewSet)
+class BookingViewSet(ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication]
+    authentication_classes = [JWTAuthentication, SessionAuthentication]
+
+    def get_queryset(self):
+        return Booking.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-
 
 
 

@@ -1,6 +1,10 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from .views import ( trekingList, trekingDetail,  campingList, campingDetail,caravanList, caravanDetail,
-                     NewsListCreateAPIView, NewsDetailAPIView, bookingCreate)
+                     NewsListCreateAPIView, NewsDetailAPIView, BookingViewSet)
+
+router = DefaultRouter()
+router.register('bookings', BookingViewSet, basename='bookings')
 
 urlpatterns = [
     path('treking/', trekingList.as_view()),
@@ -15,5 +19,5 @@ urlpatterns = [
     path('news/', NewsListCreateAPIView.as_view()),
     path('news/<int:pk>/', NewsDetailAPIView.as_view()),
 
-    path('booking/', bookingCreate.as_view()),
+    path('', include(router.urls)),
 ]
