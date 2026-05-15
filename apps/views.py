@@ -17,8 +17,8 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated)
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.viewsets import ModelViewSet
 #  LOCAL APP IMPORTS
-from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment, Contact, News)
-from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer, NewsSerializer)
+from .models import ( Treking, Camping, Caravan, Booking, Country, HotelComment, Contact )
+from .serializers import (TrekingSerializer, CampingSerializer, CaravanSerializer, BookingSerializer )
 
 # -------- NORMAL VIEWS --------
 def index(request):
@@ -26,10 +26,6 @@ def index(request):
     rent = Caravan.objects.all()
 
     return render(request, "apps/index.html", {"cities": cities, "rent":rent})
-
-def news_page(request):
-    news = News.objects.all().order_by('-created_at')
-    return render(request, "apps/news.html", {"news": news})
 
 # ================= TREKKING =================
 def treking_page(request):
@@ -177,8 +173,58 @@ def search(request):
         "caravan_results": caravan_results,
         "news_results": news_results,
     })
+# -------- treking API --------
 
-# -------- API VIEWS --------
+API_KEY = "b5b4d7f98c664bc9811f5c0dd5581040"
+
+
+def news_page(request):
+
+    query = request.GET.get('query')
+
+    # SEARCH NEWS
+    if query:
+        url = (
+            f"https://newsapi.org/v2/everything?"
+            f"q={query}&language=en&sortBy=publishedAt"
+            f"&pageSize=100&apiKey={API_KEY}"
+        )
+
+    # DEFAULT NEWS
+    else:
+        url = (
+            f"https://newsapi.org/v2/top-headlines?"
+            f"country=us&pageSize=100&apiKey={API_KEY}"
+        )
+
+    articles = []
+
+    try:
+
+        response = requests.get(url, timeout=10)
+
+        # Check request status
+        response.raise_for_status()
+
+        # Convert response to JSON
+        news = response.json()
+
+        # Check API status
+        if news.get("status") == "ok":
+            articles = news.get("articles", [])
+        else:
+            print("API ERROR:", news.get("message"))
+
+    except requests.exceptions.RequestException as e:
+        print("REQUEST ERROR:", e)
+
+    context = {
+        'articles': articles
+    }
+
+    return render(request, 'apps/news.html', context)
+
+# -------- treking API --------
 
 class trekingList(ListCreateAPIView):
     queryset = Treking.objects.all()
@@ -206,14 +252,6 @@ class caravanDetail(RetrieveUpdateDestroyAPIView):
     queryset = Caravan.objects.all()
     serializer_class = CaravanSerializer
 
-# News API
-class NewsListCreateAPIView(generics.ListCreateAPIView):
-    queryset = News.objects.all().order_by('-created_at')
-    serializer_class = NewsSerializer
-
-class NewsDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = News.objects.all()
-    serializer_class = NewsSerializer
 
 # BOOKING API with (ModelViewSet)
 class BookingViewSet(ModelViewSet):

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Treking, Country, Camping, Caravan, Booking, News
+from .models import Treking, Country, Camping, Caravan, Booking
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,9 +34,3 @@ class BookingSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['user']
 
-class NewsSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True)
-
-    class Meta:
-        model = News
-        fields = '__all__'

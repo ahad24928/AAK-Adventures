@@ -1,134 +1,355 @@
-{% extends 'apps/base.html' %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block title %}News & Events | AAK {% endblock %}
+    <title>AAK NEWS </title>
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'apps/news.css' %}">
-{% endblock %}
+    {% load static %}
 
-{% block main %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 
-<div class="news-container">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- HERO FEATURED NEWS -->
-    <div class="hero-news">
+</head>
 
-        <img src="{{ news.0.image.url }}" alt="featured">
+<body>
 
-        <div class="hero-overlay">
-            <span class="tag">Featured</span>
+    <!-- HEADER -->
 
-            <h1>{{ news.0.title }}</h1>
+    <header class="top-header">
 
-            <p>{{ news.0.description|truncatechars:160 }}</p>
+        <div class="logo">
+            AAK NEWS
+        </div>
 
-            <button onclick="openModal(
-                '{{ news.0.title|escapejs }}',
-                '{{ news.0.image.url }}',
-                '{{ news.0.description|escapejs }}',
-                '{{ news.0.location|escapejs }}'
-            )">
-                Read More
+        <div class="menu">
+
+            <a href="{% url 'index' %}">Home</a>
+            <a href="/?query=india">India</a>
+            <a href="/?query=world">World</a>
+            <a href="/?query=politics">Politics</a>
+            <a href="/?query=sports">Sports</a>
+            <a href="/?query=technology">Technology</a>
+            <a href="/?query=business">Business</a>
+
+        </div>
+
+    </header>
+
+    <!-- SEARCH -->
+
+    <div class="search-section">
+
+        <form method="GET">
+
+            <input type="text"
+            name="query"
+            placeholder="Search latest news...">
+
+            <button type="submit">
+                Search
             </button>
-        </div>
+
+        </form>
+
     </div>
 
-    <!-- PRESS RELEASES -->
-    <div class="section-head">
-        <h2>Press Releases</h2>
-        <a href="#" class="view-all">View all</a>
+    <!-- BREAKING NEWS -->
+
+    <div class="breaking">
+
+        <span>BREAKING</span>
+
+        <marquee>
+            Latest breaking news from India and around the world •
+            Technology • Politics • Sports • Entertainment
+        </marquee>
+
     </div>
 
-    <div class="card-row">
+    <!-- MAIN SECTION -->
 
-        {% for item in news|slice:"1:4" %}
-        <div class="news-card">
+    <section class="main-section">
 
-            <div class="img">
-                <img src="{{ item.image.url }}">
+        <!-- LEFT NEWS -->
+
+        <div class="left-news">
+
+            <div class="section-title">
+                TOP STORIES
             </div>
 
-            <div class="text">
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.description|truncatechars:90 }}</p>
+            {% for article in articles|slice:":5" %}
 
-                <button onclick="openModal(
-                    '{{ item.title|escapejs }}',
-                    '{{ item.image.url }}',
-                    '{{ item.description|escapejs }}',
-                    '{{ item.location|escapejs }}'
-                )">
-                    Read
-                </button>
+            <div class="small-news">
+
+                <div class="news-category">
+                    {{ article.source.name }}
+                </div>
+
+                <a href="{{ article.url }}" target="_blank">
+                    {{ article.title }}
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- HEADLINE -->
+
+        <div class="headline-news">
+
+            {% with articles.0 as first %}
+
+            <div class="news-category red">
+                HEADLINES
+            </div>
+
+            <h1>
+                {{ first.title }}
+            </h1>
+
+            <p>
+                {{ first.description }}
+            </p>
+
+            {% if first.urlToImage %}
+            <img src="{{ first.urlToImage }}" alt="">
+            {% endif %}
+
+            {% endwith %}
+
+        </div>
+
+        <!-- ADS -->
+
+        <div class="right-side">
+
+            <div class="ad-box">
+
+                <h3>ADVERTISEMENT</h3>
+
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200"
+                alt="">
+
             </div>
 
         </div>
-        {% endfor %}
 
-    </div>
+    </section>
 
-    <!-- ALL NEWS GRID -->
-    <div class="section-head">
-        <h2>Travel Inspiration</h2>
-        <a href="#" class="view-all">View all</a>
-    </div>
+    <!-- PREMIUM SECTION -->
 
-    <div class="grid">
+    <section class="premium-section">
 
-        {% for item in news %}
-        <div class="grid-card">
+        <div class="premium-title">
+            EXPRESS PREMIUM
+        </div>
 
-            <img src="{{ item.image.url }}">
+        <div class="premium-container">
 
-            <div class="grid-content">
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.description|truncatechars:100 }}</p>
+            {% for article in articles|slice:"5:9" %}
 
-                <button onclick="openModal(
-                    '{{ item.title|escapejs }}',
-                    '{{ item.image.url }}',
-                    '{{ item.description|escapejs }}',
-                    '{{ item.location|escapejs }}'
-                )">
-                    Read More
-                </button>
+            <div class="premium-card">
+
+                {% if article.urlToImage %}
+                <img src="{{ article.urlToImage }}" alt="">
+                {% endif %}
+
+                <div class="premium-content">
+
+                    <span>PREMIUM</span>
+
+                    <h3>
+                        {{ article.title }}
+                    </h3>
+
+                </div>
+
             </div>
 
+            {% endfor %}
+
         </div>
-        {% endfor %}
 
-    </div>
+    </section>
 
-</div>
+    <!-- TOP NEWS -->
 
-<!-- MODAL -->
-<div id="newsModal" class="modal">
-    <div class="modal-box">
+    <section class="bottom-news">
 
-        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="bottom-left">
 
-        <img id="mImg">
-        <h2 id="mTitle"></h2>
-        <p id="mDesc"></p>
-        <small id="mLoc"></small>
+            <div class="section-title">
+                TOP NEWS
+            </div>
 
-    </div>
-</div>
+            {% with articles.10 as news %}
 
-<script>
-function openModal(title,img,desc,loc){
-    document.getElementById("newsModal").style.display="flex";
+            <div class="bottom-card">
 
-    document.getElementById("mTitle").innerText = title;
-    document.getElementById("mImg").src = img;
-    document.getElementById("mDesc").innerText = desc;
-    document.getElementById("mLoc").innerText = loc;
-}
+                <div>
 
-function closeModal(){
-    document.getElementById("newsModal").style.display="none";
-}
-</script>
+                    <div class="news-category">
+                        SPECIAL REPORT
+                    </div>
 
-{% endblock %}
+                    <h2>
+                        {{ news.title }}
+                    </h2>
+
+                </div>
+
+                {% if news.urlToImage %}
+                <img src="{{ news.urlToImage }}" alt="">
+                {% endif %}
+
+            </div>
+
+            {% endwith %}
+
+        </div>
+
+        <!-- LATEST -->
+
+        <div class="latest-news">
+
+            <div class="section-title">
+                LATEST NEWS
+            </div>
+
+            {% for article in articles|slice:"11:17" %}
+
+            <div class="latest-item">
+
+                <div class="news-category">
+                    {{ article.source.name }}
+                </div>
+
+                <a href="{{ article.url }}" target="_blank">
+                    {{ article.title }}
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- TRENDING NEWS -->
+
+    <section class="trending-section">
+
+        <div class="section-title">
+            TRENDING NEWS
+        </div>
+
+        <div class="trending-container">
+
+            {% for article in articles|slice:"17:23" %}
+
+            <div class="trending-card">
+
+                {% if article.urlToImage %}
+                <img src="{{ article.urlToImage }}" alt="">
+                {% endif %}
+
+                <div class="trending-content">
+
+                    <div class="news-category">
+                        {{ article.source.name }}
+                    </div>
+
+                    <h3>
+                        {{ article.title }}
+                    </h3>
+
+                    <p>
+                        {{ article.description|truncatewords:20 }}
+                    </p>
+
+                    <a href="{{ article.url }}" target="_blank">
+                        Read Full Story
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- WORLD NEWS -->
+
+    <section class="world-news">
+
+        <div class="section-title">
+            WORLD NEWS
+        </div>
+
+        <div class="world-grid">
+
+            {% for article in articles|slice:"23:31" %}
+
+            <div class="world-card">
+
+                {% if article.urlToImage %}
+                <img src="{{ article.urlToImage }}" alt="">
+                {% endif %}
+
+                <div class="world-content">
+
+                    <div class="news-category">
+                        WORLD
+                    </div>
+
+                    <h4>
+                        {{ article.title }}
+                    </h4>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+            AAK NEWS
+        </div>
+
+        <div class="footer-links">
+
+            <a href="/">Home</a>
+            <a href="/?query=india">India</a>
+            <a href="/?query=world">World</a>
+            <a href="/?query=sports">Sports</a>
+            <a href="/?query=technology">Technology</a>
+
+        </div>
+
+        <p>
+            © 2026 AAK NEWS. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>
